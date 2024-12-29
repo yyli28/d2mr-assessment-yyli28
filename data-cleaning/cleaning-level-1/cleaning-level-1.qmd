@@ -1,0 +1,294 @@
+---
+title: 'Level 1 Data Cleaning: Clean the mtcars Dataset'
+---
+
+# Objective
+
+The objective of this assignment is to practice cleaning and transforming a messy dataset using tidyverse functions. You will use skills like renaming and reordering columns, sorting rows, changing data types, mutating data, and using the stringr and forcats packages.
+
+In this Level 1 Cleaning assignment, you will work with a simple dataset and focus on basic data cleaning tasks. Most tasks are outlined in the assignment script. You may want to review the [Data Cleaning Walkthrough]() before you begin.
+
+You may additionally or alternatively complete the [Level 2 Data Cleaning assignment](). In Level 2, you will work with a more complex dataset and perform additional cleaning tasks with less direct instruction. The Level 2 assignment has more opportunities to demonstrating meeting course standards than this Level 1 assignment and is recommended for those who are already comfortable with the tasks in this assignment.
+
+# Instructions
+
+1. If you have not already done so, pull the latest changes from the `d2mr-assignments` repository to ensure you have the most up-to-date version of the assignment files. Confirm you are working in your fork of the repository.
+2. Open `cleaning-level-1.qmd` in RStudio and follow the instructions in the Setup section below to load and inspect the (clean) `goal.mtcars` dataset. 
+    - **Important:** The provided code makes a small modification to the original `mtcars` dataset to create a `goal.mtcars` dataset. You will use this goal dataset as a reference to clean the `messy-mtcars.csv` dataset, not the true original.
+3. Follow the tasks described in the assignment script to clean the dataset and return it to its original state.
+4. At several points in this document you will come across questions or non-coding exercises. Answer these questions in the text of this .qmd document, immediately below the question.
+5. *Optional:* Continue to follow the instructions in the assignment script to clean the dataset above and beyond matching the original. 
+
+
+### Tasks
+
+**Reminder:** Your goal is to match `goal.mtcars` (created below), *not* the default `mtcars`.[^1]
+
+[^1]: Why? The `mtcars` dataset includes models names as *row names* rather than as a variable/column. For the purposes of this cleaning exercise, it's more useful to treat model names as a variable.
+
+1. **Renaming Columns:** Rename columns to match the original `mtcars` dataset column names.
+2. **Reordering Columns:** Ensure the columns are in the correct order.
+3. **Sorting Rows:** Sort the rows by `mpg` (miles per gallon) and then by `cyl` (number of cylinders).
+4. **Changing Data Types:** Ensure `gear` and `carb` are factors and other columns are numeric.
+5. **Mutating Data:** Create a new column `hp_per_cyl` calculated as `hp` (horsepower) divided by `cyl`.
+6. **String Manipulation:** Use `stringr` to clean any unwanted spaces or characters in the `model` column.
+7. **Handling Factors:** Use `forcats` to ensure the levels of `gear` are ordered as `3`, `4`, `5`.
+
+# Setup
+
+## Loading libraries and set seed
+
+```{r}
+#| label: setup
+library(tidyverse)
+set.seed(1234)
+```
+
+
+## Read in and inspect messy data
+
+Read in and inspect the messy dataset `messy-mtcars.csv`.
+
+```{r}
+
+#| label: read-messy-data
+
+### LEAVE THIS CHUNK AS-IS ###
+
+# You *might* need to edit the filepath, but don't change anything else!
+
+# Read in messy-mtcars.csv
+messy.mtcars <- read_csv(
+  ########################################
+  "messy-mtcars.csv", ## <-- THIS IS THE ONLY THING IN THIS CHUNK YOU CAN CHANGE IF NECESSARY
+  ########################################
+  trim_ws = FALSE, name_repair = "minimal", col_types = cols(.default = col_character()))
+
+# Inspect the data
+head(messy.mtcars)
+
+```
+
+## Inspect the original mtcars dataset
+
+```{r}
+#| label: inspect-original-data
+
+### LEAVE THIS CHUNK AS-IS ###
+
+# Load the original mtcars dataset
+data(mtcars)
+
+# Create the "goal.mtcars" dataset
+# Convert row names to a column called "model" (see note above about row names)
+goal.mtcars <- mtcars %>%
+  rownames_to_column(var = "model")
+
+# Inspect the goal.mtcars dataset
+head(goal.mtcars)
+
+# Optionally inspect the original mtcars dataset to see what the row names vs column issue looks like
+# head(mtcars)
+
+```
+
+
+QUESTIONS:
+
+1. What are the differences between the messy dataset and the original mtcars dataset?
+
+<!-- answer below -->
+
+2. What are the main issues you need to address in cleaning?
+
+<!-- answer below -->
+
+
+
+# Clean the Dataset
+
+## Creat "clean" dataset
+
+```{r}
+
+#| label: make-cleaning-dataset
+
+# Create a dataset to work with during the cleaning process called "clean.mtcars"
+
+
+```
+
+
+## Clean columns/variables
+
+
+```{r}
+
+#| label: rename-columns
+
+# Rename columns to match the original mtcars dataset
+
+
+```
+
+```{r}
+
+#| label: reorder-columns
+
+# Reorder columns to match the original mtcars dataset
+
+
+```
+
+```{r}
+
+#| label: correct-data-types
+
+# Correct variable data types
+
+```
+
+## Checkpoint 1
+
+```{r}
+
+#| label: checkpoint-1
+
+# Inspect the current state of the dataset
+
+# Use all.equal() to check if clean.mtcars matches goal.mtcars
+
+```
+
+Questions:
+
+3. The current state of the dataset does not yet match the `goal.mtcars` dataset. Explain the issues that `all.equal()` flags.  Are there groups of issues that can be addressed together?
+
+<!-- answer below -->
+
+3. Install (if necessary) and load the `daff` package. In the code chunk below, use the `diff_data()` function to identify the differences between `clean.mtcars` and `goal.mtcars`. 
+
+```{r}
+#| label: diff-data
+
+# Install and/or load the daff package if needed
+# install.package("daff")
+# library(daff)
+
+# Use render_diff() and diff_data() to identify differences between clean.mtcars and goal.mtcars
+
+
+```
+
+How is this method of identifying data discrepancies different from `all.equal()`? Which do you find more helpful at this point?
+
+<!-- answer below -->
+
+## Clean data values
+
+Identifying specific value problems and cleaning them might take a little creativity at times! Use the troubleshooting/debugging workflows we've discussed to get as far as you can.
+
+```{r}
+
+#| label: remove-unwanted-spaces
+
+# Remove unwanted whitespace in any columns required
+
+
+```
+
+```{r}
+
+#| label: impute-missing-values
+
+# Impute missing values for cyl and hp
+
+```
+
+```{r}
+
+#| label: round-numeric-values
+
+# Round numeric values
+
+```
+
+```{r}
+
+#| label: fix-typos
+
+# Fix typos in model names
+## Hint: This can be completed with a 6-line mutate() statement
+
+
+
+```
+
+```{r}
+
+#| label: remove-extra-column
+
+# Remove the extra column
+
+
+```
+
+
+## Checkpoint 2
+
+```{r}
+#| label: checkpoint-2
+
+# Inspect the dataset and compare to goal.mtcars
+
+# all.equal()
+
+# daff
+
+```
+
+Questions:
+
+5. Is your dataset identical to `goal.mtcars`? If not, what are the remaining issues? If there were any issues you could not resolve in code, describe a proposed solution in plain English.
+
+<!-- answer below -->
+
+
+# Optional Cleaning Tasks
+
+You can call it a day here, or continue with the optional cleaning tasks below. These tasks are a chance to challenge yourself and practice your skills further. They are also additional opportunities to demonstrate mastery of course standards! 
+
+
+## Additional guided cleaning
+
+*Optional:* Complete any number of the following tasks to further clean the dataset. Each task should be in its own code chunk with an appropriate label and clearly commented code:
+
+1. Create a new factor column `mpg_category` that categorizes `mpg` into "low", "medium", and "high" based on the distribution of `mpg` values.
+2. Create a new factor column `wt_category` that categorizes `wt` into "light", "medium", and "heavy" based on the distribution of `wt` values, then reverse the order of the levels.
+3. Create a new column `mpg_per_cyl` that calculates `mpg` divided by `cyl`.
+4. Filter the data to only include cars with automatic transmissions. (Hint: `?mtcars` will show you useful info.)
+5. Identify which variable would be better suited as a logical variable, then convert it to logical.
+6. Sort the dataset by `mpg_category` then reverse alphabetically by `model` (so that models with the same `mpg_category` are sorted Z to A).
+7. Write the cleaned dataset as a csv file called `clean-mtcars.csv`, then read the csv back in maintaining the correct data types.
+
+
+## Unguided cleaning and transformation
+
+*Optional:* If you have the time and interest, continue transforming this dataset as you please. Create new columns based on the existing ones, reformat strings, try your hand at a regex replacement, summarize by groups (factor levels), visualize a simple relationship, or anything else you can think of. You can do this in addition to or instead of the suggested additional cleaning tasks above.
+
+
+# Submission & Assessment
+
+To submit:
+
+1. Modify the `assessment.md` in this mini-project's directory:
+    1. Check off all objectives you believe you have demonstrated
+    2. Indicate which objectives you are meeting for the first time (if any)
+    3. Complete any relevant open-ended items
+2. Push your changes to your centralized assignment repository on GitHub. 
+3. Confirm that Dr. Dowling nad your section TA are added as collaborators to your repository.
+4. Submit your work in your next open mini-project assignment by including the following information in the text box:
+    1. The title of the assignment: "Assignment: Clean the mtcars Dataset (Level 1)"
+    2. A link to the **directory** for this assignment in your centralized assignment repo
+
+

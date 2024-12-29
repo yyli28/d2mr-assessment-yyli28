@@ -1,0 +1,34 @@
+---
+title: 'Walkthrough: Clean the Iris Dataset (Guided Exercise)'
+---
+
+# Objective
+
+The objective of this walkthrough is to demonstrate cleaning and transforming a messy dataset using tidyverse functions. Each step explains what to do and why, then provides code to carry it out. 
+
+To use this guide, read through each section and run the code in each chunk as you go. As you review, consider whether there are alternative ways to achieve the same result.
+
+At the end of the document, there is a code chunk for you to practice constructing a complete, single pipeline to accomplish the same tasks. Try to recreate this pipeline on your own, referring to the walkthrough as needed.
+
+After completing this guided walkthrough, you should be able to complete the Level 1 Data Cleaning Assignment. If you already feel very comfortable with the material, you should begin with the Level 2 Data Cleaning assignment. You may complete and submit either or both for credit.
+
+# Instructions
+
+1.  Download the `data-cleaning` assignment repo from GitHub Classroom, which contains `messy-iris.csv`, `cleaning-iris.R`, `assessment.md` and a README with these instructions.
+2.  Practice directed cleaning
+3.  Open `cleaning-iris.Rmd` in RStudio and follow the instructions to load and inspect the (clean) Iris dataset. Your first goal is to recreate this dataset from the provided messy version.
+4.  Follow the tasks described in the assignment script to clean the dataset and return it to its original state.
+5.  Turn your "clean" dataset into a *tidy* tibble using tidyverse functions. Use comments to document your code and explain your steps.
+
+# Tasks
+
+1.  Renaming Columns: Rename columns to match the original Iris dataset column names: Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, Species.
+2.  Reordering Columns: Ensure the columns are in the correct order.
+3.  Sorting Rows: Sort the rows by Species and then by Sepal.Length.
+4.  Changing Data Types: Ensure Species is a factor and other columns are numeric.
+5.  Mutating Data: Create a new column Sepal.Area calculated as Sepal.Length \* Sepal.Width.
+6.  String Manipulation: Use stringr to clean any unwanted spaces or characters in the Species column.
+7.  Handling Factors: Use forcats to ensure the levels of Species are ordered as setosa, versicolor, virginica.
+
+# Submission & Assessment
+
