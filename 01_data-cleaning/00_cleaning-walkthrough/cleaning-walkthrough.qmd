@@ -1,0 +1,753 @@
+---
+title: 'Data Cleaning: Walkthrough (iris)'
+---
+
+# Objective
+
+**This is a guided walkthrough and may not be submitted for credit.**
+
+The objective of this walkthrough is to demonstrate cleaning and transforming a messy dataset using tidyverse functions. Each step explains what to do and why, then provides code to carry it out. 
+
+To use this guide, read through each section and run the code in each chunk as you go. As you review, consider whether there are alternative ways to achieve the same result.
+
+At the end of the document, there is a code chunk for you to practice constructing a complete, single pipeline to accomplish the same tasks. Try to recreate this pipeline on your own, referring to the walkthrough as needed.
+
+After completing this guided walkthrough, you should be able to complete the Level 1 Data Cleaning Assignment. If you already feel very comfortable with the material, you should begin with the Level 2 Data Cleaning assignment. You may complete and submit either or both for credit.
+
+# Instructions
+
+Just follow along! Open this quarto notebook and run chunks as you get to them. You can also render this document to HTML and view it in your browser or Viewer pane. I recommend the former so that you can play around with the code as you go.
+
+
+# Setup
+
+## Loading libraries and set seed
+
+```{r}
+#| label: setup
+library(tidyverse)
+set.seed(1234)
+
+```
+
+
+## Read in and inspect messy data
+
+Read in and inspect the messy dataset `messy-iris.csv`.
+
+```{r}
+
+#| label: read-messy-data
+
+### LEAVE THIS CHUNK AS-IS ###
+
+# You *might* need to edit the filepath, but don't change anything else!
+
+# Read in messy-iris.csv
+messy.iris <- read_csv(
+  ########################################
+  "messy-iris.csv", ## <-- THIS IS THE ONLY THING IN THIS CHUNK YOU CAN CHANGE IF NECESSARY
+  # you may need to change the file path if your working directory has changed
+  ########################################
+  trim_ws = FALSE, name_repair = "minimal", col_types = cols(.default = col_character()))
+
+# Inspect the data using head(), str(), and glimpse()
+# Notice the differences in the information you get with each
+head(messy.iris)
+str(messy.iris)
+glimpse(messy.iris)
+
+
+```
+
+## Inspect the original iris dataset
+
+```{r}
+#| label: inspect-original-data
+
+### LEAVE THIS CHUNK AS-IS ###
+
+# Load the original iris dataset
+data(iris)
+
+# Inspect the data using head(), str(), and glimpse()
+# Notice the differences in the information you get with each
+head(iris)
+str(iris)
+glimpse(iris)
+
+```
+
+
+We can compare the messy and original datasets to identify the differences between them using either `all.equal()` or `diff_data()` from the `daff` package.
+
+```{r}
+#| label: compare-datasets
+
+# Compare the messy and original datasets using all.equal()
+all.equal(messy.iris, iris)
+```
+The `all.equal()` function will return a message indicating the differences between the two datasets. Here we've got a total of `r length(all.equal(messy.iris, iris))` differences.
+
+<!-- See what I did there with the `r`? That's an inline R expression, which is a handy way to include the results of R code in your text. Right now when I run this, I see 17 errors, but what if I change this guide in the future to make it easier or more complicated? This way, I don't have to remember to update the number in the text. That inline expression will always be accurate, while "17" could be wrong. -->
+
+Alternatively, we can use the `diff_data()` function from the `daff` package to identify the differences between the two datasets.
+
+```{r}
+#| label: diff-data
+
+# Load the daff package (install if necessary)
+library(daff)
+
+# Use render_diff() and diff_data() to identify differences between messy.iris and iris
+
+diff_data(messy.iris, iris)
+## you can do this with just daff_data(), but render_diff() will give you a pretty output in the viewer that can be easier to read, which is the point of using daff in the first place
+render_diff(diff_data(messy.iris, iris))
+
+```
+
+Which one is more helpful right now? I'd say `all.equal()` at this point. It actually tells us what some solvable problems are (though we do have to figure out how to interpret them). `diff_data()` just tells us that there are differences, but since right now the datasets are *very* different in structure, it can really only tell us that there are differences in every row (which was already pretty obvious).
+
+**QUESTIONS:**
+
+1. What are the differences between the messy dataset and the original iris dataset?
+
+- Columns are out of order
+- Column names don't match
+- Data types are incorrect (all are character in messy, but numeric/factor in original)
+- Values in the species column have lots of problems (extra spaces, capitalization, typos, etc.)
+- Numbers have commas in them instead of periods
+- Numbers aren't rounded to the same number of decimal places
+
+2. What are the steps you need to take to clean the messy dataset? 
+
+- Rename columns
+- Reorder columns
+- Change data types: Species to factor, other columns to numeric
+- Correct values in Species column: remove extra spaces, fix typos, ensure consistent capitalization
+- Remove commas from numbers
+- Round numbers to the same number of decimal places (1)
+
+3. Are there any considerations for what order to do these steps in?
+
+- Changing data types should be done after fixing values in the Species column, since it will be easier to make the changes with strings than with factors
+- Renaming and reordering columns can be done at any point, but it might be easier to do it first so you can see the data in a more familiar format
+- Rounding numbers can only happen after those variables are numeric
+- If we want to use simple "find and replace" (e.g. grep-style) functions swap commas to periods, that should happen while they're still strings
+    - Since commas are actually a valid way to represent decimals in some countries, there may be functions that are specifically designed for this purpose that we could use instead (which probably take numeric values)
+
+
+# Clean the Dataset
+
+## Create "clean" dataset
+
+```{r}
+
+#| label: make-cleaning-dataset
+
+# Create a dataset to work with during the cleaning process called "clean.iris"
+clean.iris <- messy.iris
+
+```
+
+
+## Clean column names
+
+We have multiple options for the rename and reorder (aka relocate) steps. We can use `rename()` and `relocate()` to do so in two discrete steps, or use `select()` to do it all at once.
+
+Either way, start by looking at the column names and order in both the original and messy datasets.
+
+```{r}
+
+#| label: inspect-column-names
+
+# Check the names and order of columns in iris:
+colnames(iris)
+
+# Check the names and order of columns in messy.iris:
+colnames(messy.iris)
+
+```
+
+### Two-step method
+
+```{r}
+
+#| label: rename-columns
+
+# Rename columns to match the original iris dataset with rename()
+clean.iris <- messy.iris %>%
+    # The format is rename(new_name = old_name)
+  rename(Sepal.Length = SepalLength, Sepal.Width = SepalWidth, Petal.Length = PetalLength, Petal.Width = PetalWidth, Species = FlowerSpecies)
+
+```
+If we take a look at the column names in our working dataset (`colnames(clean.iris)`), we can see that they are now in the correct format. However, the order of the columns is still incorrect. We can use the `relocate()` function to reorder the columns.
+
+```{r}
+#| label: reorder-columns
+
+# Reorder columns to match the original iris dataset with relocate()
+clean.iris <- clean.iris %>%
+  relocate(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, Species)
+
+```
+
+If we did this correctly, the column names for both should be identical, which we can check.
+
+```{r}
+#| label: compare-column-names-1
+
+# Compare the column names of clean.iris and iris
+
+all.equal(colnames(clean.iris), colnames(iris))
+```
+
+### One-step method
+
+Both `rename()` and `relocate()` can be combined into a single step using `select()`. This is a more concise way to achieve the same result. In fact, both `rename()` and `relocate()` are actually just wrappers for `select()`, and use what's called "select helpers" to do their work.
+
+```{r}
+
+#| label: select-columns
+
+# The select() function can rename and reorder columns in one step
+
+## Rename columns to match the original iris dataset the same as with the two-step method
+## If we put them in the order of the original dataset, it will reorder at the same time
+clean.iris <- messy.iris %>%
+  select(Sepal.Length = SepalLength, Sepal.Width = SepalWidth, Petal.Length = PetalLength, Petal.Width = PetalWidth, Species = FlowerSpecies)
+
+```
+
+They should be identical, which we can check.
+
+```{r}
+#| label: compare-column-names-2
+
+# Compare the column names of clean.iris and iris
+all.equal(colnames(clean.iris), colnames(iris))
+
+```
+
+
+## Checkpoint 1
+
+Let's compare the two datasets again. Maybe we've fixed some of the issues that `all.equal()` flagged, and with that restructuring, maybe `diff_data()` will be more helpful now.
+
+```{r}
+
+#| label: checkpoint-1-allequal
+
+# Inspect the current state of the dataset
+head(clean.iris)
+
+# Use all.equal() to check if clean.iris matches iris
+all.equal(clean.iris, iris)
+
+```
+Now we've got `r length(all.equal(clean.iris, iris))` flagged differences, down from the `r length(all.equal(messy.iris, iris))`. Progress!
+
+What about `diff_data()`?
+
+```{r}
+#| label: checkpoint-1-diffdata
+
+# Use render_diff() and diff_data() to identify differences between clean.iris and iris
+render_diff(diff_data(clean.iris, iris))
+
+```
+
+Still not super helpful. 
+
+### Sort rows
+
+Around now, when `diff_daff()` is so very uninformative, we might notice that the values in each row aren't just a little off, they seem totally unrelated! Take a look a the `head()` of each:
+
+```{r}
+#| label: inspect-heads
+
+head(clean.iris)
+head(iris)
+
+```
+We can immediately see that this isn't just an issue of typos and rounding erros; the rows are in a totally different order. As long as this is the case, our comparison functions aren't going to be helpful at the row level for things like identifying mismatched strings.
+
+The first thought should be to figure out how `iris` is sorted so that we can match it, but that's not going to be doable. Although `iris` has a natural order, there are no unique IDs for each row to match or sort by, and although there is *some* ordering by species, that won't let us sort the individual rows within each species.
+
+So what do we do? Thinking about it, isn't this an aspect of the original `iris` dataset that doesn't feel particularly "clean"? It's not that the data is wrong, but we can make it easier to work with by sorting it in a way that makes sense. Then we can sort our `clean.iris` dataset in the same way.
+
+We can use `arrange()` to sort the rows in both datasets by Species, then some order of our choosing.
+
+```{r}
+
+#| label: sort-rows
+
+# Make a sorted.iris dataset to preserve the original if we need it later
+sorted.iris <- iris %>%
+  arrange(Species, Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) # we don't really need to sort by all of these, since it's very unlikely that anything more than 1 or 2 of the measurements would be identical, but it can't hurt
+
+# Sort clean.iris in the same way
+clean.iris <- clean.iris %>%
+  arrange(Species, Sepal.Length, Sepal.Width, Petal.Length, Petal.Width)
+
+
+```
+
+Now let's compare the two:
+
+```{r}
+
+#| label: checkpoint-1-sortrows 
+
+all.equal(clean.iris, sorted.iris)
+render_diff(diff_data(clean.iris, sorted.iris))
+
+head(clean.iris)
+head(sorted.iris)
+```
+
+Well that kind of went nowhere! The rows don't seem to be arranged the same way at all, and `diff_data()` is still not helpful. What went wrong? 
+
+They're both sorted by the same criteria, but the *possible* values in the Species column are not the same in the two datasets. We need to fix the values in the Species column before sorting will be helpful.
+
+Was this a waste of time? I don't think so. We've learned some things we can use:
+
+1. We identified a problem that we will need to be dealt with at some point, so we'll be set up to do that later. 
+2. When we saw that it wasn't super helpful now, we also identified the *why*, noting problems in the Species column that we need to fix.
+3. Since we know why it didn't work, we know when the next time we try it should be. We don't need to do these comparisons or try to sort again until we have (at a minimum) fixed the Species column. As we move forward we should prioritize fixing that column so that we can use these tools to check our work.
+
+
+## Clean data values
+
+We need to change values in every single column, both the measurements and the species categories. We'll also need to change the data types. We could tackle either the numeric stuff or the string/factor stuff first, but we learned in the step above that the Species column is holding us back. Let's start there.
+
+### Clean Species values
+
+Start by identifying what the unique values of Species are actually supposed to be. The column `iris$Species` is a factor, so we can use `levels()` to see what the possible values are.
+
+```{r}
+
+#| label: levels-species
+
+# Check the levels of the Species column in the original iris dataset
+levels(iris$Species)
+
+```
+
+Now we can compare these to the unique values in the messy dataset. The column `clean.iris$Species` is a character, so `levels()` won't help us (levels necessarily belong to factors). We can use `unique()` to see what the possible values are in this character column.
+
+```{r}
+
+#| label: unique-species
+
+# Check the unique values of the Species column in clean.iris
+unique(clean.iris$Species)
+
+```
+
+The original dataset has three levels: "setosa", "versicolor", and "virginica". The messy dataset has a billion (well, technically `r length(unique(clean.iris$Species))`, but it's a lot). Our job now is to spot patterns in the messy data that we can use to clean it up.
+
+What patterns of errors are there?
+
+1. Extra spaces, both at the beginnings and ends of the values
+2. Inconsistent capitalization, with some values in all caps, some in all lowercase, and some mixed (everything is lower case in `iris$Species`)
+3. There are some 0s in there, that's weird, they should be the letter "o"
+
+We might notice that there are problems that don't fall into these patterns, but they seem to be a little random. We'll be able to fix these easier once we've taken care of the more systematic issues.
+
+We'll fix those patterned errors in one step:
+
+```{r}
+
+#| label: clean-species-patterns
+
+# Use stringr to clean the Species column
+clean.iris <- clean.iris %>%
+    mutate(
+        # Trim whitespace from the beginning and end of the string
+        Species = str_squish(Species), # this is equivalent to str_trim(Species, side = "both"), but str_squish is more fun to say
+        # Convert to lowercase
+        Species = str_to_lower(Species),
+        # Replace 0 with o
+        Species = str_replace_all(Species, "0", "o") # we could also use str_replace(Species, "0", "o") since there is never more than one 0 in a row, but this is safer
+    )
+```
+
+
+Now we can look at the unique values in the Species column again to see what's left:
+
+```{r}
+
+#| label: unique-species-2
+
+# Check the unique values of the Species column in clean.iris after initial cleaning
+unique(clean.iris$Species)
+```
+
+
+Much better! Looks like values 1-3 are the same as the original dataset. There are only `r length (unique(clean.iris$Species))-length(levels(iris$Species))` unique values now, which is a good sign.) 
+<!-- That incline code evaluates to 3 for me right now, but remember that using a dynamic expression like that is more robust. I change the data or the code, I don't have to remember to update the number in the text. -->
+
+Let's fix these last few values:
+
+```{r}
+
+#| label: clean-species-typos
+
+# Use stringr to clean the Species column
+clean.iris <- clean.iris %>%
+    mutate(
+        # Replace "setsoa" with "setosa"
+        Species = str_replace_all(Species, "setsoa", "setosa"),
+        # Replace "versicolr" with "versicolor"
+        Species = str_replace_all(Species, "versicolour", "versicolor"),
+        # Replace "virginia" with "virginica"
+        Species = str_replace_all(Species, "virginia", "virginica")
+    )
+
+# Like above, we could have just used str_replace() since there is only one instance of each typo in each row, but unless you know that you specifically only want to target the first instance of something, the `_all` version of most stringr functions should be your default
+
+```
+
+This should take care of all the mismatches, so let's check:
+
+```{r}
+
+#| label: levels-species
+
+# Check the levels of the Species column in the original iris dataset
+levels(iris$Species)
+
+# Check the unique values of the Species column in clean.iris after final cleaning
+unique(clean.iris$Species)
+
+# Are they the same?
+levels(iris$Species) == unique(clean.iris$Species) # this will work even though one is a factor and the other a character because levels() and unique() both evaluate to vectors, and the values within those vectors are what is being compared
+
+```
+
+They match! The last thing to do is to convert the Species column to a factor.
+
+```{r}
+
+#| label: factor-species
+
+# Convert the Species column to a factor
+clean.iris <- clean.iris %>%
+    mutate(Species = factor(Species))
+
+## Note that in this case, the order of the levels doesn't matter. There's no intrinsic order to three species categories of flower. If we want them sorted later alphabetically or something we can do that later.
+
+## If this was a factor that DID have an intrinsic hierarchical order, we could specify that at this point by using: 
+
+# factor(Species,
+#     levels = c("setosa", "versicolor", "virginica"),
+#     ordered = TRUE)
+
+
+# If we did it right the levels should be the same as the original dataset
+# We should use levels() for both now that they are both factors!
+levels(clean.iris$Species) == levels(iris$Species)
+
+
+```
+
+### Checkpoint 2
+
+#### Sort rows: Take 2
+
+Our Species column is fixed now, so let's try sorting the rows again before comparing datasets programmatically. The work we did may or may not have been helpful yet, but since this is what we identified as the biggest problem, we should check.
+
+```{r}
+
+#| label: sort-rows-take-2
+
+# Make a sorted.iris dataset to preserve the original if we need it later
+
+## We don't actually need to do this since we already did it in the chunk above, but if you were working on your own data you probably would have cut that chunk since it wasn't very useful. It that case you'd need to define that object here.
+
+sorted.iris <- iris %>%
+  arrange(Species, Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) # we don't really need to sort by all of these, since it's very unlikely that anything more than 1 or 2 of the measurements would be identical, but it can't hurt
+
+# Sort clean.iris in the same way
+clean.iris <- clean.iris %>%
+  arrange(Species, Sepal.Length, Sepal.Width, Petal.Length, Petal.Width)
+
+head(sorted.iris)
+head(clean.iris)
+
+```
+At least the first few rows look comparable now. We know we'll need to round the measurements, and that would make all the values we see here match. 
+
+
+#### Compare
+
+Let's compare the two datasets:
+
+```{r}
+
+#| label: checkpoint-2-compare
+
+all.equal(clean.iris, sorted.iris)
+render_diff(diff_data(clean.iris, sorted.iris))
+```
+We checked off a few more problems from the `all.equal()` errors. We're down to `r length(all.equal(clean.iris, iris))` flagged differences. Most of them have to do with data types for the measurement columns, so let's tackle that next.
+
+### Clean numeric values
+
+We've got three things to address in the measurement columns:
+
+1. Commas instead of periods
+2. Data types should be numeric, not character
+3. Numbers not rounded to the same number of decimal places
+
+Like with the rename/reorder bit at the beginning, there are multiple ways to approach these.
+
+#### Three-step method
+
+One way is to just go down the line solving each problem one at a time. First we need to plan out the order. We know to accomplish (1) we need to keep the columns as characters, but for (3) we need to convert them to numeric. So we should do them in the order 1-2-3 (huh, how terribly convenient).
+
+```{r}
+
+#| label: clean-numeric-three-step
+
+# Make a copy of the dataset to work with, just for the purposes of trying out the two different methods
+
+clean.iris.3step <- clean.iris %>% 
+    # Replace commas with periods
+    mutate(
+        Sepal.Length = str_replace_all(Sepal.Length, ",", "."),
+        Sepal.Width = str_replace_all(Sepal.Width, ",", "."),
+        Petal.Length = str_replace_all(Petal.Length, ",", "."),
+        Petal.Width = str_replace_all(Petal.Width, ",", ".")
+    ) %>%
+    # Convert to numeric
+    mutate(
+        Sepal.Length = as.numeric(Sepal.Length),
+        Sepal.Width = as.numeric(Sepal.Width),
+        Petal.Length = as.numeric(Petal.Length),
+        Petal.Width = as.numeric(Petal.Width)
+    ) %>%
+    # Round to 1 decimal place
+    mutate(
+        Sepal.Length = round(Sepal.Length, 1),
+        Sepal.Width = round(Sepal.Width, 1),
+        Petal.Length = round(Petal.Length, 1),
+        Petal.Width = round(Petal.Width, 1)
+    )
+
+## Worth noting here that although we have mutated each variable individually, we could have done each step in just one line of code using mutate(across(...)). I'll leave you to play around and figure that out. I'd start off with the convertion to numeric; that's the simplest to implement with across().
+
+```
+
+
+#### One-step method
+
+We can do this all in a single mutate by using `parse_number()` from the `readr` package to convert the commas to periods and then convert the columns to numeric. This exists because not all regions use the same characters to represent decimals and "grouping" (ie the commas in one million: 1,000,000). With the `locale` argument, you can tell `parse_number()` what to treat as these characters, then it will do the job of converting to numeric with those specifications. The resulting numbers will use the period as the decimal mark, which is the standard in R.
+
+To round to the tenths place we use `round()`, but instead of making this its own mutate, we just wrap the whole thing in `round(..., 1)`. R evaluates inside out, so it will do all the work for `parse_number()` first, then round the results.
+
+```{r}
+
+#| label: clean-numeric-one-step
+
+clean.iris.1step <- clean.iris %>%
+    mutate(
+        # Replace commas with periods and convert to numeric with parse_number()
+        Sepal.Length = round( # We wrap the whole thing in round() to round to 1 decimal place
+            parse_number(
+                Sepal.Length, 
+                locale = locale(decimal_mark = ",", grouping_mark = ".")
+            ), 1), # this is the end of the round() function
+        # Do the same for the other columns
+        Sepal.Width = round(
+            parse_number(
+                Sepal.Width, 
+                locale = locale(decimal_mark = ",", grouping_mark = ".")
+            ), 1),
+        Petal.Length = round(
+            parse_number(
+                Petal.Length, 
+                locale = locale(decimal_mark = ",", grouping_mark = ".")
+            ), 1),
+        Petal.Width = round(
+            parse_number(
+                Petal.Width, 
+                locale = locale(decimal_mark = ",", grouping_mark = ".")
+            ), 1)
+    )
+
+```
+
+Again, we can do columns at once with `across()`. Here's what that looks like:
+
+```{r}
+
+#| label: clean-numeric-across
+
+clean.iris.across <- clean.iris %>%
+    mutate(
+        across(
+            # Select the columns to apply the function to
+            Sepal.Length:Petal.Width,
+            # Apply the function to each column
+            ~round(
+                parse_number(
+                    .x, 
+                    locale = locale(decimal_mark = ",", grouping_mark = ".")
+                ), 1)
+        )
+    )
+```
+
+I am not going to explain this one in detail, but I will say that it's a good idea to try to understand it. It's a very powerful tool that can save you a lot of time and typing.
+
+Comparing the resulting results of all three methods produces identical datasets:
+
+```{r}
+
+#| label: compare-numeric-methods
+
+all.equal(clean.iris.3step, clean.iris.1step)
+all.equal(clean.iris.1step, clean.iris.across)
+
+
+# Since they're all equal, pick any of the three to save as the clean.iris
+clean.iris <- clean.iris.1step
+```
+
+### Checkpoint 3
+
+Let's compare the two datasets again.
+
+```{r}
+
+#| label: checkpoint-3-compare
+
+
+## Resort as a safety measure
+## See what happens if you leave this out! 
+
+clean.iris <- clean.iris %>%
+  arrange(Species, Sepal.Length, Sepal.Width, Petal.Length, Petal.Width)
+
+all.equal(clean.iris, sorted.iris)
+render_diff(diff_data(clean.iris, sorted.iris))
+
+```
+
+We're down to `r length(all.equal(clean.iris, iris))` flagged differences with `all.equal()`, but `diff_data()` disagrees! This is where it's finally helpful. `all.equal()` is extremely sensitive. The remaining flags are about Attributes, which you can think about as meta-information for the objects.
+
+If we want to dig in to figure out what these are about, start by just looking at what the attributes are. The flags we got mention "class," so keep an eye on that.
+
+```{r}
+
+#| label: compare-attributes
+
+# Check the attributes of the two datasets
+attributes(clean.iris)
+attributes(sorted.iris)
+
+# Single out the class attribute
+attributes(clean.iris)$class
+attributes(sorted.iris)$class
+
+```
+
+Looks like there's a difference in the class(es) of the objects themselves. The `sorted.iris` dataset we made is a `data.frame` (and only that!), while the `clean.iris` dataset is a `data.frame`, a `tbl_df`, and a `tbl`. 
+
+If you need a little reminder about tibbles and dataframes: 
+
+- **Dataframes** (`data.frame`) are the base R class for tabular data. 
+- **Tibbles** (`tbl`) are a modern take on the dataframe that have some nice features, like better printing and some more helpful error messages. 
+- The `tbl_df` class is a subclass of `tbl` that is used to make sure that the object is a tibble.
+
+As you're working with data in R -- especially in the tidyverse -- you'll rarely need to worry about these differences. R can usually figure out what you want to do with your data, and reclass things if needed. But it's still technically part of the objects, and `all.equal()` is sensitive enough to pick up on it.
+
+Now we make a judgment call. Do we care about this difference? If we do, we can make the two objects the same class. If we don't, we can move on.
+
+Remember that when we compared with `diff_data()`, it didn't show any differences. As a rule of thumb, if `diff_data()` doesn't show anything, you're *probably* fine. It *probably* means that remaining differences are in the metadata, not the data itself.
+
+If you want to be thorough about it, you can make the two objects the same class. We'll make them both tibbles.
+
+```{r}
+
+#| label: make-tibbles
+
+# Make both datasets tibbles
+clean.iris <- as_tibble(clean.iris) # this already was a tibble, but we'll run it again to make sure
+sorted.iris <- as_tibble(sorted.iris)
+
+```
+
+Now we can compare the two datasets again:
+
+```{r}
+
+#| label: checkpoint-3-compare-2
+
+all.equal(clean.iris, sorted.iris)
+render_diff(diff_data(clean.iris, sorted.iris))
+
+```
+
+No differences! We're done!
+
+We should acknowledge the caveat that we just matched our `clean.iris` to the `sorted.iris` dataset, which we created from the original `iris` dataset, not to `iris`. We made the deliberate choice to slightly modify the original dataset because it would not be possible[^1] to make it easier to compare to our cleaned dataset.
+
+[^1] Well, it would be possible, but not with the tools available to us that we're using in this class. It would be a lot of work for no real benefit, but if you want to figure out how to do it as an exercise, go for it!
+
+# Simplify
+
+We can simplify our code by combining all the cleaning steps into a single pipeline. This will make it easier to understand and maintain in the future.
+
+```{r}
+
+#| label: simplify-pipeline
+
+# Create a single pipeline to clean the messy dataset
+clean.iris.1pipe <- messy.iris %>%
+  # Rename columns
+  rename(Sepal.Length = SepalLength, Sepal.Width = SepalWidth, Petal.Length = PetalLength, Petal.Width = PetalWidth, Species = FlowerSpecies) %>%
+  # Reorder columns
+  relocate(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, Species) %>%
+  # Clean Species column
+  mutate(
+    Species = str_squish(Species),
+    Species = str_to_lower(Species),
+    Species = str_replace_all(Species, "0", "o"),
+    Species = str_replace_all(Species, "setsoa", "setosa"),
+    Species = str_replace_all(Species, "versicolour", "versicolor"),
+    Species = str_replace_all(Species, "virginia", "virginica"),
+    Species = factor(Species)
+  ) %>%
+  # Clean numeric columns
+  mutate(
+    across(
+      Sepal.Length:Petal.Width,
+      ~round(
+        parse_number(.x, 
+          locale = locale(decimal_mark = ",", grouping_mark = ".")
+        ), 1)
+    )
+  ) %>%
+  # Sort rows
+  arrange(Species, Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) %>%
+  # Convert to tibble
+  as_tibble()
+
+```
+
+Now we can compare the simplified pipeline to the `sorted.iris` dataset:
+
+```{r}
+
+#| label: compare-pipelines
+
+all.equal(sorted.iris, clean.iris.1pipe)
+render_diff(diff_data(sorted.iris, clean.iris.1pipe))
+
+```
+
+Beautiful. 
