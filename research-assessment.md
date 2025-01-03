@@ -1,13 +1,24 @@
-# Assessment
+# Research Project Assessment
+
 
 ## Instructions
 
-1. Complete the basic information section in full. Confirm all links are correct and accessible, and that all materials are in the same project subdirectory as this assessment file, or that you have provided clear instructions for accessing external materials.
-2. Complete any items in the additional information section as needed.
-3. Check off any objectives you are attempting to demonstrate, and indicate where a met objective should count toward your 20 unique objectives.
-4. Optionally, complete the unassessed objectives section, which may earn points toward the 20 additional objectives-based points.
+Before submitting your research project draft for grading, confirm:
+
+1. The manuscript .qmd for your project is in the root directory and knits to .pdf without error.
+2. The knitted .pdf of your draft is in the root directory, with the same filename as the .qmd.
+3. This `research-assessment.md` file is in the root directory of your project repo.
+4. Dr. Dowling and your section TA are collaborators on your GitHub repo with permissions to pull/push.
+
+To complete this assessment:
+
+1. Complete the basic information section in full. 
+2. Confirm all links are correct and accessible
+3. Check off all objectives you are attempting to demonstrate
+    1. To earn 30 points you must demonstrate each objective. However, you do not need to attempt all objectives with each draft if your goal is to build the project over time.
+    2. If the objective is demonstrated somewhere other than the .qmd, add a note in the grader comments section for where to find it (e.g., "see `data-cleaning.R` lines 20-30").
 4. Optionally, complete the reflection section, which may earn engagement points.
-5. Submit a link to the GitHub subdirectory containing this file in the corresponding Canvas assignment.
+
 
 ## Basic information
 
@@ -17,32 +28,29 @@ CNetID:
 
 Section:
 
-Mini-project title:
+Research project title:
 
 Submission date:
 
-Project GitHub subdirectory URL:
+Submission number (1-4):
 
-URL or instructions to access additional materials, if needed:
+Project GitHub repository URL:
 
+Filename of manuscript .qmd:
 
-## Additional information
+Filename of knitted .pdf:
 
-1. Did you complete the project with direct collaborators or general support? If so, who did you collaborate with and what was/were their contribution(s)?
-    1. Direct collaborators (students who will be turning in a version of the same project) and their contributions:
-    2. General support (students who helped you with debugging, conceptual understanding, or the like) and their contributions:
-2. Did you use LLMs or other AI models to generate text or code for this project? If so, which tools did you use and how did you use them? Remember in this class you *are* allowed (even encouraged) to use these tools for help with coding, but not for writing text. This can be very brief, just one or two sentences is fine unless you have more you'd like to add.
-    1. answer here 
-3. For off-the-menu projects only, did you complete the project as proposed? If not, what changed?
-    1. answer here or n/a
+## Basic requirements
 
-## Assessed Objectives
+Basic requirements for the dataset are as follows:
 
-Mark an objective attempt for any learning objectives you believe you have demonstrated in this assignment.
+## Assessment
 
-Mark when an objective attempt should count toward the 20 unique objectives requirement. If your attempt is successful, your grader will mark the standard as met on your objective-tracker document.
+The final project must demonstrate each of 30 the course learning objectives, each worth 1 point. 
 
-Below each learning objective is a list of general expectations for meeting that objective. You should aim to meet all expectations to earn a point for meeting the objective, but these are not rigid requirements. For example, writing a complex and creative function that uses multiple arguments and returns a complex output could meet the "parse and define functions and arguments" objective, even if it is only used in one context. 
+Below each learning objective is a list of general expectations for meeting that objective. You should aim to meet all expectations to earn a point for meeting the objective, but these are not rigid requirements. For example, writing a complex and creative function that uses multiple arguments and returns a complex output could meet the "parse and define functions and arguments" objective, even if it is only used in one context.
+
+Refer to the website for general tips on meeting these objectives and an FAQ.
 
 ### GitHub and R Studio
 
@@ -53,7 +61,6 @@ Below each learning objective is a list of general expectations for meeting that
     3.  Does not have duplicate/redundant elements
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments: 
 
@@ -63,27 +70,24 @@ Below each learning objective is a list of general expectations for meeting that
     2.  Outlines the repo structure with file tree or similar
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
-3.  Integrate a GitHub repo with an R studio project, including .gitignore file
+3.  integrate a GitHub repo with an R studio project, including .gitignore file
 
     1.  All scripts run and all notebooks render if the repo is cloned to another location
     2.  .gitingore comprehensively excludes unnecessary, private, and very large files and is be commeted appropriately
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
-4.  Effectively use version control
+4.  effectively use version control
 
     1.  Used frequent, informative commit messages
     2.  Relies on document revisions rather than manually created new versions
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -91,32 +95,31 @@ Below each learning objective is a list of general expectations for meeting that
 
 5.  Find, install, require, and load R packages
 
-    1. No errors occur when running scripts in a new environment and/or comments sufficiently explain package installation requirements
-    2. Uses more than one function to install/load/require packages
+    1. No errors occur when running scripts in a new environment 
+        1. If packages other than the "class packages" listed on the resources page are used, code to install/require them is included *and commented out*
+        2. When a reader opts-in to installing packages by uncommenting the code, it runs without errors 
+    2. Uses more than one function to install/load/require packages (including those used in commented code)
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
-
+        
 6.  Use arithmetic, comparison, and logical operators
 
     1. Uses all three types of operators
     2. Uses multiple operators in data transformation pipelines and/or inline R code
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
 7.  Parse and define functions and arguments
 
-    1. Defines at least one function with at least one argument
-    2. Runs without error and produces expected output in at least 2 contexts
+    1. Defines at least one function with at least one argument in code chunks or sourced scripts
+    2. User-defined function(s) run(s) without error and produces expected output in at least 2 contexts
     3. Functions are well-documented with comments
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -126,11 +129,9 @@ Below each learning objective is a list of general expectations for meeting that
     2. Uses multiple types of conditional/loop functions (e.g., `if_else()`, `case_when()`, `for`, `while`)
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
-
-### Tidyverse
+        
 
 9.  Use `readr` functions to read in and write out data
 
@@ -138,7 +139,6 @@ Below each learning objective is a list of general expectations for meeting that
     2. Writes out intermediate and/or final datasets in code chunks or sourced scripts
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -149,7 +149,6 @@ Below each learning objective is a list of general expectations for meeting that
     3. Combines `dplyr` and `tidyr` functions in a data transformation pipeline
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -159,7 +158,6 @@ Below each learning objective is a list of general expectations for meeting that
     2. Uses `stringr` functions in a data transformation pipeline
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -169,7 +167,6 @@ Below each learning objective is a list of general expectations for meeting that
     2. Uses `forcats` functions in a data transformation pipeline
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -181,7 +178,6 @@ Below each learning objective is a list of general expectations for meeting that
     2. At least one plot is multi-variable
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -190,20 +186,18 @@ Below each learning objective is a list of general expectations for meeting that
     1. Uses at least 2 unique data-mapped `aes()` arguments (e.g., color, shape, size) to group data in a plot in one or multiple plots
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
-
+        
 15. Use facets to create parallel plots
 
     1. Uses facets in at least 2 ways (e.g., using both `facet_wrap()` and `facet_grid()`), modifying the number of rows and columns, using free vs fixed scales, etc.)
     2. Combines facets with other dynamic grouping aesthetics
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
-
+        
 16. Create publication-quality plots using `theme` and `labs` layers
 
     1. Plots have informative titles, axis labels, and legends
@@ -212,7 +206,6 @@ Below each learning objective is a list of general expectations for meeting that
     4. Uses at least 1 static aesthetic (e.g., color, shape, size) that improves visual clarity without mapping to data
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -225,7 +218,6 @@ Below each learning objective is a list of general expectations for meeting that
     3. Presents results in narrative text, table, or plot
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -236,7 +228,6 @@ Below each learning objective is a list of general expectations for meeting that
     3. Presents results in narrative text, table, or plot
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -248,7 +239,6 @@ Below each learning objective is a list of general expectations for meeting that
     4. Uses dynamic inline R code to render data-dependent text
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -261,7 +251,6 @@ Below each learning objective is a list of general expectations for meeting that
     3. May use `cite_r()` to cite R and R packages
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -274,7 +263,6 @@ Below each learning objective is a list of general expectations for meeting that
     5. May include references not cited in-text
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -288,7 +276,6 @@ Below each learning objective is a list of general expectations for meeting that
     4.  Chunks are distributed throughout the manuscript, sensibly placed near the text they support
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments: 
         
@@ -300,10 +287,9 @@ Below each learning objective is a list of general expectations for meeting that
     4. Organizes setup chunks sensibly
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
-
+        
 24. Render publication-quality tables, figures, and images from code chunks
 
     1. Produces at least 1 table or image with a caption
@@ -313,7 +299,6 @@ Below each learning objective is a list of general expectations for meeting that
     5. References render without error and link to the correct table/figure in pdf/html output
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -326,30 +311,28 @@ Below each learning objective is a list of general expectations for meeting that
     5. Chunks are organized sensibly and appear near the text they support
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
-### R Markdown and quarto
+### R Markdown and Quarto
 
 26. Create and maintain a quarto document YAML header
     
     1. Includes all necessary metadata, output options, and formatting options necessary to render an APA styled document (or other specified style if appropriate for the project)
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
-
+        
 27. Use quarto R Markdown to compose an academic manuscript
 
     1. Uses at least 2 unique text styles (e.g., bold, italics, code)
     2. Uses at least 2 unique header levels
     3. Includes at least 1 list
     4. Includes at least 1 footnote
+    - NOTE: This is going to be one of the most flexible objectives to demonstrate.  You need to demonstrate a range of markdown skills and use them to make a readable, informative manuscript. Hitting the four points above should do that, but you can use your judgment about what kind of markdown features will best serve your project. No matter what, you should use markdown to follow APA7 guidelines.
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -357,10 +340,9 @@ Below each learning objective is a list of general expectations for meeting that
 
     1. Replaces static text with inline R references in at least 3 unique numeric contexts
     2. Replaces static text with inline R references in at least 1 character context
-    3. Ideally, uses inline R references for all data-dependent text
+    3. Ideally, uses inline R references for *all* data-dependent text
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
 
@@ -368,11 +350,10 @@ Below each learning objective is a list of general expectations for meeting that
 
     1. Uses inline R functions to render at least 3 unique data-dependent text outputs (e.g., performs rounding, calculates means, subtracts one list length from another, etc. -- inline rather than in a code chunk)
 
-    -   [ ] Objective attempt
-    -   [ ] Unique objective attempt
-    -   [ ] Objective met
-    -   Grader comments:
-
+        -   [ ] Objective attempt
+        -   [ ] Objective met
+        -   Grader comments:
+        
 30. Use `knitr` and quarto to produce an APA7 formatted 1-click PDF manuscript
 
     1. Produces a PDF output that is formatted in APA7 style
@@ -381,97 +362,7 @@ Below each learning objective is a list of general expectations for meeting that
     4. No additional steps are needed (e.g., finding data, determining necessary packages to install and load, running unsourced scripts)
 
         -   [ ] Objective attempt
-        -   [ ] Unique objective attempt
         -   [ ] Objective met
-        -   Grader comments:
-
-## Unassessed Objectives & Off-the-Syllabus Skills
-
-You may earn points toward the 20 additional objectives-based points by demonstrating any of the following skills, or by demonstrating "off-the-syllabus"" skills related to the course but not directly covered in class. These cannot count toward demonstration of 20 unique objectives.
-
-## Unassessed learning objectives
-
-The following learning objectives are not required for the course grade but are important for your development as a data scientist. They may be demonstrated in the mini-projects as part of the additional 20 points earned beyond the 20 for unique, assessed standards.
-
-You are not required to demonstrate these objectives in your independent project, but incorporating them can enhance the overall quality of your project and add to the engagement component of the project grade.
-
-### Troubleshooting, debugging, and best practices
-
-1.  use frequent, informative comments in code and markdown
-2.  find and understand documentation for R packages and functions
-3.  follow a debugging workflow with independent and collaborative strategies
-4.  parse and investigate error messages
-5.  follow a coding style guide
-
-### RStudio & R
-
-6.  customize RStudio
-7.  use BibTeX with `citr` and Zotero integration
-8.  parse and write complex `for` and `while` loops
-9.  create and use intermediate datasets
-10. determine when code is better suited for a sourced script vs. a notebook chunk and source scripts appropriately
-
-### Conceptual skills
-
-11. explain and apply the “grammar of graphics”
-12. name and differentiate R data types
-13. name and differentiate R objects
-14. define “tidy” data and explain its advantages and disadvantages
-15. recognize and interpret common data visualizations
-16. determine most appropriate visualizations and analyses for specific research questions and data
-
-### Unassessed objectives evaluation
-
-If you believe you have demonstrated any of the above skills sufficiently to count toward the 20 additional objectives-based points, please indicate which objective(s) you believe you have met and provide a brief explanation of how you have met each objective.
-
-<!-- Explanation of demonstrated unassessed objectives below this line -->
-
-
-<!-- Explanation of demonstrated unassessed objectives above this line -->
-
-### Off-the-syllabus skills evaluation
-
-If you have demonstrated any off-the-syllabus skills related to the course but not directly covered in class, please describe the skill(s) and how you have demonstrated them in your project. These may include things like building Quarto websites, working with non-tabular data, creating Shiny or other interactive applications, etc. Menu items marked "OtS" should demonstrate these skills, but you may demonstrate them in any other menu item or off-the-menu project.
-
-<!-- Explanation of demonstrated off-the-syllabus skills below this line -->
-
-
-<!-- Explanation of demonstrated off-the-syllabus skills above this line -->
-
-
-## Reflection
-
-Optionally, you may provide a brief reflection on your experience with this project. What did you learn? What would you do differently next time? What was the most challenging part of the project? What was the most rewarding? You do not have to answer these questions directly; they are just meant to help you think about your experience.
-
-Thoughtful reflections may earn engagement points.
-
-
-<!-- Reflection below this line -->
-
-
-
-
-
-
-
-
-
-<!-- Do not edit below this line. -->
-
-## Grader feedback
-
--   Grader:
--   Date:
--   Points toward unique objectives (up to 20):
--   Additional points (up to 20):
--   TA provisional engagement points (up to 10):
--   Final approved engagement points (up to 10):
--   Total points (up to 50):
-
-Engagement points are awarded for going above and beyond the expectations of the project and are not guaranteed on any given submission.. Demonstrating the assessed learning objectives earns you points in those categories, but engagement points are awarded for exceptional effort, creativity, or skill.
-
-TAs may recommend engagement points provisionally, but the instructor will make the final decision on engagement points.
-
-Additional comments: 
-
+        -   Grader comments:        
+        
 

@@ -198,38 +198,4 @@ Projects may be added or revised throughout the quarter, so be sure to keep you 
 
 ### FAQ
 
-1. **Can I use the same data from my independent project?**
-    - No. You should use different data for each mini-project unless the assignment calls for it or you receive prior approval. You can use the same data for multiple mini-projects, but you should demonstrate different skills in each.
-2. **Can I update the top-level [assessment.md](assessment.md) file?**
-    - No(ish). Every mini-project should have its own subdirectory, including its own [assessment.md](assessment.md) file. Leave the top-level file as-is and duplicate it for each mini-project you complete. The "ish" part of the no(ish) is that you can make changes you expect to apply to all your mini-projects (e.g., your name and section number).
-3. **What's the difference between "off-the-syllabus" and "off-the-menu"?**
-    - "Off-the-syllabus" projects are designed to let you practice skills that aren't explicitly covered in the course but are related to the skills we do cover. You'll be provided with some guidance for approaching the project, but it will be up to you learn the skills independently. These are already part of the menu and don't require a proposal.
-    - "Off-the-menu" projects are entirely self-designed and can be about anything you want, as long as will help you meet the goals of the course. You can use them to check off assessed learning objectives, to go above and beyond like an OtS project, do demonstrate unassessed/conceptual skills, or a combination. You'll need to submit a proposal for approval before you can start working on the project.
-4. **How are off-the-syllabus/off-the-menu projects assessed?**
-    - The same as other projects, using an [assessment.md](assessment.md) file. If you want, you can earn all 40 points through OtS or OtM projects. They are also a great way to earn the engagement points, as they require you to take a more active role in your learning.
-5. **There are no materials in the subdirectory for a project I want to start -- what do I do?**
-    - Unless it's a guided exercise, just go for it! Most projects will just have a simple readme with very open-ended instructions anyway. If you start a project and then it turns out the instructions added later were way different than the direction you took it, that's fine. You're functionally doing an off-the-menu project.
-6. **Can I do the same mini-project twice? Can I resubmit a mini-project after its graded?**
-    - No. You get one shot at each mini-project, but this shouldn't be a limitation. There are 40+ menu items and you can always go off the menu to design a project that will let you demonstrate the same skills in a different context. If you're not sure if your idea is different enough, submit a proposal for approval
-7. **Can I work with a partner or group on a mini-project?**
-    - Yes! Well, mostly. Some projects are specifically designed for pairs or groups, and they are a great way to demonstrate community engagement on top of project engagement. You can also design OtM group projects.
-    - For projects that aren't designed to be completed collaboratively, you should complete the work individually, but you still can (should!) collaborate to support one another. Discuss ideas, help debug, etc. 
-    - In all cases you should each submit your own [assessment.md](assessment.md) file in the appropriate subdirectory of your own forks and note on it who you worked with. If you have questions about what kinds of collaboration are ok or the logistics of group work, post your questions on Slack or email Dr. Dowling.
-8. **Will I screw up the main repository if I do something wrong? Will my classmates see if I am terrible at github**
-    - No. You can't make changes to the main repository unless you're a collaborator, and you can't become a collaborator unless you're a TA or Dr. Dowling. If you somehow managed to commit changes to the main repository, you would be prompted to create a "pull request," so you'd know you weren't in the right place. If you managed to accidentally submit a pull request, I would just deny the request and everything would still be fine. 
-    - Your classmates won't see your work unless you show it to them. The only way they would see your work is if you made a public repository and shared the link or invited them as collaborators to a private repository. Your professor and section TA need to be collaborators on your forked repository to grade your work, but I promise we aren't digging through your commit files to judge your git prowess. That would be pretty counterproductive for the course goals. We also just don't have the time even if we wanted to.
-9. **What does ((some term not on the syllabus)) mean in the names of the projects?**
-    - It's probably part of an off-the-syllabus project. If you're curious about things like papaja, shiny, or LaTeX, look them up! If you're not sure whether something is off the syllabus or just something we haven't gotten to yet, ask on Slack.
-10. **How many mini-projects must/can I complete?**
-    - You can complete a minimum of 1 mini-project and a maximum of 10. Most students will complete 3-5. Points earned are cumulative across all mini-projects, but remember at least 20 points must be earned from meeting unique assessed learning objectives. You can repeat objectives in the remaining 20, but you cannot earn points for the same objective more than once per mini-project.
-11. **What does Canvas have to do with anything?**
-    - Submitting to Canvas functionally serves to alert us that you’ve completed a project and that we should grade it. The actual assessment, including any feedback, happens in the assessment file in this repository. Your Canvas assignment will be marked as “complete” when we’ve finished grading your project and have pushed the assessment back to your repo. 
-12. **How do I know how many points I've earned?**
-    - Points earned will be added to your cumulative mini-project scores in Canvas. You won’t see numbers for each project, just complete/incomplete. You'll have 3 scores in Canvas: up to 20 points for unique objectives demonstrated, up to 20 points for repeat objectives and unassessed objectives, and up to 10 points for engagement. 
-13. **I love mini-projects! I earned all 50 points but I want to do more! (aka Can I get extra credit by doing more mini-projects?)**
-    - I appreciate the initiative and enthusiasm, but you can only earn up to 50 points across all mini-projects. Because we have limited resources for grading, we will not continue to grade submissions turned in after you've capped out all three categories. However, if you are just genuinely excited about something, please come talk with us about it in office hours! Not only will we be thrilled to get to geek out with you, but we might be able to suggest ways to incorporate it into your independent project or other coursework.
-14. **Can I use chatGPT/copilot/other AI to help me with my projects?**
-    - For code -- yes, with some caveats. You can use AI to help you with your projects, but you should be able to explain the code you write and the decisions you make. If you can't explain it, you probably shouldn't be using it. Ultimately it's your decision on whether and how to use AI to help you code. Whatever you choose, you need to disclose your use (or non-use) of AI in your project's assessment file.
-    - For text -- no. All text should be your own work, including narrative text of research reports, comments, responses to prompts, reflections, etc. 
-    
-    
+Visit the [FAQ page](http://nrdowling.com/d2mr/faq.html) of the course website for answers to common questions about the mini-projects and other course expectations.
