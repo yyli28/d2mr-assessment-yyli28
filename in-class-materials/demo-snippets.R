@@ -33,7 +33,7 @@ fnc_paste("hello", "world")
 fnc_paste_store("hello", "world")
 
 
-#### See groceries-demo.R for all the grocer's partner conditional/functions shenanigans! ####
+#### See groceries.qmd for all the grocer's partner conditional/functions shenanigans! ####
 
 
 for (i in c(2,4,8,16)) {print(i)}
