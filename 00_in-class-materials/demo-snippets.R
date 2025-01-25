@@ -142,6 +142,7 @@ print(paste0("Hello", " ", "world", "!")) # Break it up with more than two argum
 
 # Assign everything to follows to mmdata.long
 # Using the mmdata tbl ...
+
 mmdata.long <- mmdata %>%	
     # ...select three columns... 	
     select(Red, Green, Blue) %>% 	
