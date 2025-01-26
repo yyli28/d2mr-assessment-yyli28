@@ -116,7 +116,7 @@ print(paste0("Hello", " ", "world", "!")) # Break it up with more than two argum
 # 5. Examine your data in the console to see if it looks like the image
 # Running the line below will load the csv that I made for you
 # This will(/should) produce the same tibble as what you see in the slides
-# mmdata <- read_csv("00_in-class-materials/data/mmdata-ND.csv")
+mmdata <- read_csv("00_in-class-materials/data/mmdata-ND.csv")
 
 # 6. Open `MM data.xlsx` in Excel (or similar) and examine it with your human eyeballs
     # What about this file creates problems when you read-in?
@@ -238,27 +238,146 @@ mmdata2 %>%
     summarize(why_green = mean(Sum_BG_Green), why_red = mean(Sum_BG_Red), why_blue = (mean(Sum_BG_Blue)))
 
 # ONE GIANT PIPE!
-# Does Natalie or Yuchen have the Citrus-y-est, Primary-est, and Christmas-y collections of M&Ms?
+# Who has the Citrus-y-est, Primary-est, and Christmas-y collections of M&Ms?
 # This is an absurd pipe for example purposes only
 # Please never actually construct something that does something so confusing and pointless
 
 mmdata %>%  
+    # Divvy up the bags evenly
     mutate(Whose = case_when(Bag < 11 ~ "Natalie",
                              Bag < 21 ~ "Yuchen",
                              TRUE ~ "Mian")) %>% 
-    filter(Whose != "Mian") %>% 
+    # Natalie benevolently removes herself from the competition
+    filter(Whose != "Natalie") %>% 
+    # Who cares about bag number now that we've divided them up
     select(-Bag) %>% 
-    rowwise() %>% # This makes it easier to sum up many columns in the next line, but you could skip it if you wrote out each column individually: Red + Yellow + Green + ...
+    # This rowwise() function makes it easier to sum up many columns in the next line, but you could skip it if you wrote out each column individually: mutate(Total = Red + Yellow + Green + ...)
+    rowwise() %>% 
+    # c_across() is a helper function that makes it easier to sum up many columns
     mutate(Total = sum(c_across(Red:Brown))) %>% 
+    # Fruity flavors please
     rename(Tangerine = Orange, Lemon = Yellow, Grapefruit = Red, Lime = Green) %>% 
-    mutate(Christmas = Blue + Lime,
+    # Classic m&m color schemes, doesn't everyone associate grapefruit and lime with Christmas?
+    mutate(Christmas = Grapefruit + Lime,
            Primary = Grapefruit + Blue + Lemon,
            Citrus = Tangerine + Lemon + Grapefruit + Lime) %>% 
+    # Group by Whose to summarize Yuchen's and Mian's collections separately
     group_by(Whose) %>% 
+    # Sum up the totals for each collection
     summarize(Total = sum(Total), sum_Christmas = sum(Christmas), sum_Primary = sum(Primary), sum_Citrus = sum(Citrus)) %>% 
-    mutate(pct_Christmas = sum_Christmas/Total, pct_Primary = sum_Primary/Total, pct_Citrus = sum_Citrus/Total) %>% 
+    # Calculate the percentage of each collection that is each flavor, which we need to know for important reasons
+    # Take a second to figure out exactly what these percentages mean, so we know what the winner has actually managed to achieve
+    mutate(pct_Christmas = sum_Christmas/Total, pct_Primary = sum_Primary/Total, pct_Citrus = sum_Citrus/Total) %>%
+    # Select only the columns we care about
     select(1:2, Christmas = pct_Christmas, Primary = pct_Primary, Citrus = pct_Citrus) %>% 
+    # Sort rows to find our citrus champion
     arrange(Citrus)
 
+# Congratulations Mian! You have the most citrus-y collection of M&Ms!
 
 
+##############################################
+############# WEEK 4 CLASS 1 #################
+##############################################
+
+# read in the mmdata from above if it's not loaded!
+
+# pivot mmdata (originally wide) to long
+mmdata.long <- mmdata %>%
+    pivot_longer(cols = c("Red", "Green", "Blue", "Orange", "Yellow", "Brown"),
+                 names_to = "Color",
+                 values_to = "Number")
+
+
+# pivot long mmdata to wide; back to where it started
+mmdata.wide <- mmdata.long %>% 
+    pivot_wider(names_from = "Color", values_from = "Number") %>% 
+    # Relocate works like select by reordering columns, but doesn't drop anything
+    # Kind of like how rename works like select by renaming but not dropping
+    relocate(Weight,.after = last_col())
+
+# They are the same
+mmdata.wide == mmdata
+# Or are they??
+all.equal(mmdata.wide, mmdata)
+# Basically yes. The differences are in the df attributes, not the data
+# You can view attributes of any object in the environment tab by clicking
+# the little blue arrow next to the object name
+# or with
+
+attributes(mmdata.wide)
+attributes(mmdata)
+
+
+# Create example tbl for tidyr functions
+
+# ?Q?: Is this wide or long?
+glasses <- tibble(
+    condition = c(1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2),
+    participant = c(1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6),
+    score = runif(12),
+    notes = c("glasses_none", "glasses_none", "none_none", "none_none",
+              "none_incomplete", "none_incomplete", "none_none", "none_none",
+              "glasses_none", "glasses_none", "glasses_late", "glasses_late")
+)
+
+# Separate "notes" column into two columns by recognizing "_" separator
+glasses.sep <- glasses %>%
+    separate(notes, c("vision_correction", "other_notes"), sep = "_")
+
+# separate() works, but it has been superseded by 
+# separate_wider_position() & separate_wider_position()
+
+# *_position() will split based on integer values for each new column and for the separator
+glasses.sep.pos <- glasses %>% 
+    separate_wider_position(notes, c(vision_correction = 4, 1, other_notes = 4), too_many = "drop") # not super helpful here
+
+# *_delim() will split based on a given separator, like separate()
+# but has slightly different syntax
+glasses.sep.delim <- glasses %>% 
+    separate_wider_delim(notes, delim = "_", names = c("vision_correction", "other_notes"))
+
+## Take a minute to view glasses.sep, glasses.sep.pos, and glasses.sep.delim to see the differences
+
+# Unite the 2 columns back to 1 with a new separator (use ; not _)
+glasses.unite <- glasses.sep %>%
+    unite("semicolon_notes", "vision_correction":"other_notes", sep = ";")
+
+
+## Missing data
+
+# ?Q? What's actually missing in this missingdata tibble?
+missingdata <- tibble(
+    condition = c(1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2),
+    participant = c(1, NA, NA, NA, 2, NA, NA, NA, 3, NA, NA),
+    trial = c(1, 2, 3, 4, 1, 2, 3, 4, 1, 3, 4),
+    score = c(0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1),
+)
+
+fixeddata <- missingdata %>%
+    # participant id is only indicated for the first observation for each participant, fill it in for the rest
+    fill(participant) %>% 
+    # p3 did not complete trial 2, but we should still see evidence of the (incomplete) observation
+    complete(condition, trial) %>%
+    replace_na(list(participant = 3)) %>% # a HACK (will not generalize/will break)
+    arrange(condition, participant, trial) # just to make it pretty
+
+## Alternatively...
+
+# use crossing() to create a tibble of all possible (i.e. expected) participant x trial observations 
+# note that crossing() is a wrapper for expand_grid(), which is a helper for expand(), meaning you can replicate this just with expand() but this is more convenient
+# Remember this isn't the data itself, it's a kind of template for how the data could be structured in an ideal world with nothing missing
+all.ptcp.trial.combos <- crossing(
+    participant = unique(missingdata$participant),
+    trial = c(1:4)) %>%
+    filter(!is.na(participant)) 
+
+## now fix the missing data by...
+fixeddata2 <- missingdata %>%
+    # using the same fill() fnct to fix participant col.
+    fill(participant) %>%
+    # join with the expanded tibble of expected combos
+    full_join(all.ptcp.trial.combos) %>%
+    arrange(participant, trial) %>% # superstitious (it's already sorted this way) but harmless
+    # the expected observation for p3, trial2 has been created and is missing values for score (appropriately) and condition, but we know what the condition should be and use fill() as we did above 
+    fill(condition)
