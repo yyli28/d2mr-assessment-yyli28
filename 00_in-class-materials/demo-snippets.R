@@ -280,7 +280,133 @@ mmdata %>%
 ############# WEEK 4 CLASS 1 #################
 ##############################################
 
-# read in the mmdata from above if it's not loaded!
+
+### COMBINING DATA ###
+
+# Bind rows with base::rbind and dplyr::bind_rows
+
+# Create two tibbles, 3 columns: col1 col2 col3; each with 5 rows
+
+tibble1 <- tibble(col1 = c(1, 2, 3, 4, 5),
+                  col2 = c(6, 7, 8, 9, 10),
+                  col3 = c(11, 12, 13, 14, 15))
+
+tibble2 <- tibble(col1 = c(16, 17, 18, 19, 20),
+                  col2 = c(21, 22, 23, 24, 25),
+                  col3 = c(26, 27, 28, 29, 30))
+
+# a third with an extra column
+tibble3 <- tibble(col1 = c(16, 17, 18, 19, 20),
+                  col2 = c(21, 22, 23, 24, 25),
+                  col3 = c(26, 27, 28, 29, 30),
+                  col4 = c(31, 32, 33, 34, 35))
+
+# a fourth with different column names
+tibble4 <- tibble(col_1 = c(16, 17, 18, 19, 20),
+                  col_2 = c(21, 22, 23, 24, 25),
+                  col_3 = c(26, 27, 28, 29, 30))
+
+# a fifth with a different number of rows
+tibble5 <- tibble(col1 = c(16, 17, 18, 19, 20, 21),
+                  col2 = c(21, 22, 23, 24, 25, 26),
+                  col3 = c(26, 27, 28, 29, 30, 31))
+
+tibble1
+tibble2
+tibble3
+tibble4
+tibble5
+
+rbind(tibble1, tibble2) # works fine
+# rbind(tibble1, tibble3) ## NOT RUN -- gives an error because the tibbles have a different number of columns
+# rbind(tibble1, tibble4) ## NOT RUN -- gives an error because the tibbles have different column names
+
+bind_rows(tibble1, tibble2) # works fine, identical to rbind
+bind_rows(tibble1, tibble3) # works fine, adds the extra column with NAs for missing the tibble1 values
+bind_rows(tibble1, tibble4) # runs without error but treats the columns as different, so it adds the tibble4 columns to the end of the tibble1 columns
+
+# Bind columns with base::cbind and dplyr::bind_cols
+
+cbind(tibble1, tibble2) # works fine -- adds the columns of tibble2 to the right of tibble1, though it's not great that the columns have the same names
+cbind(tibble1, tibble3) # works fine -- same number of rows, it's works like above
+# cbind(tibble1, tibble5) ## NOT RUN -- gives an error because the tibbles have a different number of rows
+
+bind_cols(tibble1, tibble2) # works fine, identical to cbind *except* it renames the columns to avoid conflicts, which is preferable
+bind_cols(tibble1, tibble4) # column names were already different, so it doesn't need to rename
+# bind_cols(tibble1, tibble5) ## NOT RUN -- gives an error because the tibbles have a different number of rows (same as with cbind)
+
+# Note the difference between bind_rows and bind_cols in how they handle different numbers of rows/columns
+# bind_rows will add NAs for missing values, bind_cols will give an error
+
+## JOINS ##
+
+# a family of functions that combine data from two data frames based on common variables
+# anything you can do with bind_rows/bind_cols you can do with joins (not the reverse)
+
+# Two data frames to join
+# Both have a "name" column, but the values in the "name" columns are not the same
+# Mick is only in _members, Keith is only in _instruments
+# John and Paul are in both
+
+band_members
+band_instruments
+
+## Four most common kinds of joins
+
+# Inner join: only rows with matching values in both data frames are returned
+# result: 2 rows, one for John and one for Paul
+inner_join(band_members, band_instruments)
+
+# Full join: all rows from both data frames are returned, with NAs for missing values
+# result: 4 rows, one for each band member; NAs for Mick's instrument and Keith's band
+full_join(band_members, band_instruments)
+
+
+# Left join: all rows from the first data frame are returned, with NAs for missing values in the second data frame
+# result: 3 rows, one for each band member in band_members; no Keith
+left_join(band_members, band_instruments)
+
+
+# Right join: all rows from the second data frame are returned, with NAs for missing values in the first data frame
+# result: 3 rows, one for each band member in band_instruments; no Mick
+right_join(band_members, band_instruments)
+
+# For left and right joins, order matters! The first data frame is the "left" and the second is the "right"
+# Which means a left join is the same as a right join with the data frames reversed (though row order will differ)
+left_join(band_members, band_instruments)
+right_join(band_instruments, band_members)
+
+
+# The "by" argument specifies the column(s) to join on
+# These are all identical
+left_join(band_members, band_instruments)
+left_join(band_members, band_instruments,
+          by = join_by(name))
+left_join(band_members, band_instruments,
+          by = "name")
+right_join(band_instruments, band_members)
+band_instruments %>%
+    right_join(band_members,
+               by = "name")
+
+# If the columns have different names, you can specify the columns to join on in each data frame
+rename.band_members <- band_members %>%
+    rename(member = name)
+
+# the order of the names should match the order of the dfs
+left_join(rename.band_members, band_instruments,
+          by = c("member" = "name")) 
+
+
+
+### TIDYR ###
+
+
+# Read in the mmdata from above if it's not loaded!
+# mmdata <- read_csv("00_in-class-materials/data/mmdata-ND.csv")
+
+
+## Pivot wide and long
 
 # pivot mmdata (originally wide) to long
 mmdata.long <- mmdata %>%
@@ -381,3 +507,185 @@ fixeddata2 <- missingdata %>%
     arrange(participant, trial) %>% # superstitious (it's already sorted this way) but harmless
     # the expected observation for p3, trial2 has been created and is missing values for score (appropriately) and condition, but we know what the condition should be and use fill() as we did above 
     fill(condition)
+
+
+
+## STRINGR ##
+
+# Load the stringr library
+# library(stringr) # Note: stringr included in library(tidyverse) or can be loaded alone
+
+# Create a character vector with some strings
+my_strings <- c("Hello, world!", "Goodbye, world!", "Hello, universe!", "Goodbye, universe!", "Hello hello hello!", "Goodbye cruel, cruel world!")
+
+# str_c() concatenates strings
+# similar to but not quite the same as paste()
+# default separator is empty string "", like paste0()
+paste("Hello", "world") # "Hello world"
+paste0("Hello", "world") # "Helloworld"
+str_c("Hello", "world") # "Helloworld"
+str_c("Hello", "world", sep = ", ") # "Hello, world"
+
+# but it handles missing values differently than paste() and paste0()
+str_c("Hello", NA, "world") # NA
+paste0("Hello", NA, "world") # "HelloNAworld"
+
+# str_glue() is a version of paste() that uses {} to insert variables
+name <- "world"
+str_glue("Hello, {name}!")
+str_c("Hello, ", name, "!") # equivalent to the above
+# main the difference between str_c() and str_glue() is that str_glue() that it can insert variables directly into the string rather than concatenating them at the end, which can get annoying
+str_glue("Hello, {name}! The time is {Sys.time()}") # you can insert any R expression into the {}
+str_c("Hello, ", name, "! The time is ", Sys.time()) # equivalent to the above
+# the other difference is in the output type, str_glue has its own class (+ character)
+class(str_glue("Hello, {name}! The time is {Sys.time()}")) 
+class(str_c("Hello, ", name, "! The time is ", Sys.time())) 
+
+
+# str_length() returns the number of characters in a string
+str_length("hello")
+str_length(my_strings) # returns a vector of the number of characters in each string in the vector
+str_length(my_strings[1]) # index just the first element of the vector
+
+# str_sub() extracts a substring based on starting and ending positions
+str_sub("hello", 1, 3)
+str_sub("hello", 1, 1)
+# if you only provide one position or the end position is greater than the length of the string it will return from that(first) position to the end of the string
+str_sub("hello", 2) # "ello"
+str_sub("hello", 2, 8) # "ello"
+# use negative positions to count back from the end of the string
+str_sub("hello", -2)
+str_sub("hello", -2, -1)
+str_sub("hello", -2, 5)
+
+# str_detect() returns TRUE if a pattern is found in a string
+str_detect("Hello there!", "Hello")
+str_detect(my_strings, "Hello")
+str_detect(my_strings, "hello") # case sensitive
+str_detect(my_strings, "Hello", negate = TRUE) # negate = TRUE returns TRUE if the pattern is NOT found
+# Similar to the %like% helper from data.table
+# library(data.table)
+# "hello" %like% "ello"
+# "ello" %like% "hello"
+
+# return the index of matching values with str_which()
+str_which(my_strings, "Hello")
+
+# to return the actual values that match the pattern, use str_subset()
+str_subset(my_strings, "Hello")
+
+# str_detect() and related functions are basically more user-friendly 
+# versions of the base R grep functions
+grepl("Hello", "Hello there!") # <- ~ str_detect, returns T/F
+grep("Hello", "Hello there!") # <- ~ str_which, returns index (in a vector that is just a single thing, and so not very useful)
+grep("Hello", my_strings) # <- ~ str_which, returns index (in a real vector, so more useful)
+# the grep equivalent of str_subset() is grep() with value = TRUE
+grep("Hello", my_strings, value = TRUE) # <- ~ str_subset, returns the actual values that match the pattern
+
+
+# str_replace() replaces the first instance of a pattern in a string
+str_replace("Hello, world!", "world", "universe")
+str_replace(my_strings, "hello", "hi") # only replaces the first instance of "hello" in each string, case sensitive
+str_replace(my_strings, "cruel", "kind") # only replaces the first instance of "cruel" in each string, case sensitive
+
+# str_replace_all() replaces all instances of a pattern in a string
+str_replace_all(my_strings, "hello", "hi") # replaces all instances of "hello" in each string, case sensitive
+str_replace_all(my_strings, "cruel", "kind") # replaces all instances of "cruel" in each string, case sensitive
+
+# str_replace() and str_replace_all() are basically more user-friendly 
+# versions of the base R sub/gsub functions
+sub("hello", "hi", my_strings) # <- ~ str_replace, only replaces the first instance of "hello" in each string, case sensitive  
+gsub("hello", "hi", my_strings) # <- ~ str_replace_all
+
+# since stringr functions are more or less versions of grep functions,
+# they can take regular expressions
+
+# for example, using str_replace_all():
+str_replace_all(my_strings, "Hello|Goodbye", "Greetings") # replaces "Hello" or "Goodbye" with "Greetings"
+str_replace_all(my_strings, "[Hh]ello", "Greetings") # replaces "Hello" or "hello" with "Greetings"
+str_replace_all(my_strings, "[Hh]ello|[Gh]oodbye", "Greetings") # replaces "Hello" "Goodbye" with "Greetings", functinally case insensitive
+# you can also make it case insensitive by explicitly saying the pattern to match is a regex (wrap in regex()) and setting ignore_case = TRUE **within the regex() function** not the str_replace_all() function
+str_replace_all(my_strings, regex("hello", ignore_case=TRUE), "Greetings") # replaces "Hello" or "hello" with "Greetings"
+
+# delete patterns from strings by replacing with ""
+str_replace_all(my_strings, "Hello|Goodbye", "") # deletes "Hello" or "Goodbye"
+# or with str_remove() & str_remove_all()
+str_remove(my_strings, "Hello|Goodbye") # deletes "Hello" or "Goodbye"
+str_remove_all(my_strings, "Hello|Goodbye") # deletes "Hello" or "Goodbye"
+
+# read more about the magic of regex here: https://stringr.tidyverse.org/articles/regular-expressions.html
+
+# MORE STRINGR FUNCTIONS #
+
+# str_to_*()  convert strings to lowercase and uppercase
+str_to_lower("Hello, world!")
+str_to_upper("Hello, world!")
+str_to_title("Hello, world!") # capitalizes the first letter of each word
+
+# str_trim() removes leading and trailing whitespace
+str_trim("  Hello, world!  ")
+
+# str_pad() pads strings to a specified width
+str_pad("Hello", width = 10) # pads with spaces and places in front by default
+str_pad("Hello", width = 10, side = "right") # pads with spaces and places at the end
+str_pad("Hello", width = 10, pad = "-") # pads with a specified character
+# pad both sides
+str_pad("Hello", width = 10, side = "both")
+
+# str_trunc() truncates strings to a specified (max) width
+# 3 of those characters will be an ellipsis ("...") by default
+str_trunc("Hello, world!", width = 8) # truncates to 8 characters; by default the truncation / ellipsis is on the right side
+# but you can also put it on the left or in the center
+str_trunc("Hello, world!", width = 8, side = "left")
+str_trunc("Hello, world!", width = 8, side = "center")
+# and you can change the ellipsis to any character(s)
+str_trunc("Hello, world!", width = 8, ellipsis = "!")
+str_trunc("Hello, world!", width = 3, ellipsis = "!!!")
+str_trunc("Hello, world!", width = 8, ellipsis = "")
+
+# str_split() splits strings into a list of substrings
+str_split("Hello, world!", ",")
+str_split(my_strings, " ") # splits each string in the vector by spaces
+
+# str_flatten() flattens a list of strings into a single string
+str_flatten(my_strings) # collapses the strings with no separator
+str_flatten(my_strings, collapse = " ") # collapses the strings with a space between them
+
+
+### FORCATS ###
+
+# Load the forcats library
+# library(forcats) # Note: forcats included in library(tidyverse) or can be loaded alone
+
+# Create a factor with levels in a specific order
+my_factor <- factor(c("a", "b", "c", "a", "b", "c", "a", "b", "c"), levels = c("c", "b", "a"))
+# This ^ is an unordered factor, but the order that the levels are listed in matters for working with the factor
+
+# use levels() to see the levels of a factor
+levels(my_factor)
+
+my_ordered_factor <- factor(c("a", "b", "c", "a", "b", "c", "a", "b", "c"), levels = c("c", "b", "a"), ordered = TRUE)
+
+# use levels() to see the levels of an ordered factor
+levels(my_ordered_factor)
+
+# you can see the difference in order if you look at each
+my_factor
+my_ordered_factor # the levels are represented least to greatest
+
+# or to change the levels of a factor
+# replacing all instances of "a" with "z", "b" with "y", and "c" with "x"
+my_factor2 <- my_factor
+levels(my_factor2) <- c("z", "y", "x") # order matters, should match existing level order 
+# alternatively, specify which new levels correspond to the old levels
+my_factor3 <- my_factor
+levels(my_factor3) <- c("z" = "a", "y" = "b", "x" = "c") # order doesn't matter
+
+my_factor2
+my_factor3
+
+
+# fct_count() counts the number of occurrences of each level
+fct_count(my_factor)
+
+
