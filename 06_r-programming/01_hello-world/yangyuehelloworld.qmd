@@ -1,0 +1,22 @@
+---
+title: "yangyuehelloworld"
+format: html
+---
+
+# Mini-Project
+
+### Define the hello_world() function
+
+```{r}
+# Load required libraries
+library(stringr)
+
+# Define the hello_world() function
+# hello_world() takes arguments name (character), mood (character), and n_greet (number of greetings requested)
+hello_world <- function(name, mood) {
+  # set some possible greetings, character variables that may reference the name and mood arguments
+  greetings <- c(paste0("Hey", name, "what makes you", mood, "today?"), 
+                 paste0("Hey", name, "you look", mood, "today!"),
+                 paste0())
+}
+```
