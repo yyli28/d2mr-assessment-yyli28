@@ -1,0 +1,88 @@
+first_name,last_name,initials,mass,hair,gender,species,homeworld,height_in,brown_hair
+Mas,Amedda,MA,NA,none,masculine,Chagrian,Champala,77.1652,FALSE
+Padmé,Amidala,PA,45,brown,feminine,Human,Naboo,72.8345,TRUE
+Raymus,Antilles,RA,79,brown,masculine,Human,Alderaan,74.01559999999999,TRUE
+Wedge,Antilles,WA,77,brown,masculine,Human,Corellia,66.929,TRUE
+Dud,Bolt,DB,45,none,masculine,Vulptereen,Vulpter,37.007799999999996,FALSE
+Lando,Calrissian,LC,79,black,masculine,Human,Socorro,69.6849,FALSE
+Arvel,Crynyd,AC,NA,brown,masculine,Human,NA,NA,TRUE
+Poe,Dameron,PD,NA,brown,masculine,Human,NA,NA,TRUE
+Biggs,Darklighter,BD,84,black,masculine,Human,Tatooine,72.0471,FALSE
+Jabba,Desilijic Tiure,JD,1358,bald,masculine,Hutt,Nal Hutta,68.8975,FALSE
+Boba,Fett,BF,78.2,black,masculine,Human,Kamino,72.0471,FALSE
+Jango,Fett,JF,79,black,masculine,Human,Concord Dawn,72.0471,FALSE
+Kit,Fisto,KF,87,none,masculine,Nautolan,Glee Anselm,77.1652,FALSE
+Bib,Fortuna,BF,NA,none,masculine,Twi'lek,Ryloth,70.866,FALSE
+Adi,Gallia,AG,50,none,feminine,Tholothian,Coruscant,72.4408,FALSE
+Nute,Gunray,NG,90,none,masculine,Neimodian,Cato Neimoidia,75.19669999999999,FALSE
+San,Hill,SH,NA,none,masculine,Muun,Muunilinst,75.19669999999999,FALSE
+Jar,Jar Binks,JJ,66,none,masculine,Gungan,Naboo,77.1652,FALSE
+Dexter,Jettster,DJ,102,none,masculine,Besalisk,Ojom,77.9526,FALSE
+Qui-Gon,Jinn,QJ,89,brown,masculine,Human,NA,75.9841,TRUE
+Obi-Wan,Kenobi,OK,77,"auburn, white",masculine,Human,Stewjon,71.6534,FALSE
+Plo,Koon,PK,80,none,masculine,Kel Dor,Dorin,74.01559999999999,FALSE
+Eeth,Koth,EK,NA,black,masculine,Zabrak,Iridonia,67.3227,FALSE
+Cliegg,Lars,CL,NA,brown,masculine,Human,Tatooine,72.0471,TRUE
+Owen,Lars,OL,120,"brown, grey",masculine,Human,Tatooine,70.0786,TRUE
+Darth,Maul,DM,80,none,masculine,Zabrak,Dathomir,68.8975,FALSE
+Tion,Medon,TM,80,none,masculine,Pau'an,Utapau,81.1022,FALSE
+Sly,Moore,SM,48,none,NA,NA,Umbara,70.0786,FALSE
+Mon,Mothma,MM,NA,auburn,feminine,Human,Chandrila,59.055,FALSE
+Rugor,Nass,RN,NA,none,masculine,Gungan,Naboo,81.1022,FALSE
+Jocasta,Nu,JN,NA,white,feminine,Human,Coruscant,65.7479,FALSE
+Nien,Nunb,NN,68,none,masculine,Sullustan,Sullust,62.992,FALSE
+Barriss,Offee,BO,50,black,feminine,Mirialan,Mirial,65.3542,FALSE
+Ric,Olié,RO,NA,brown,masculine,Human,Naboo,72.0471,TRUE
+Leia,Organa,LO,49,brown,feminine,Human,Alderaan,59.055,TRUE
+Quarsh,Panaka,QP,NA,black,masculine,Human,Naboo,72.0471,FALSE
+Captain,Phasma,CP,NA,none,feminine,Human,NA,NA,FALSE
+Yarael,Poof,YP,NA,none,masculine,Quermian,Quermia,103.9368,FALSE
+Bail,Prestor Organa,BP,NA,black,masculine,Human,Alderaan,75.19669999999999,FALSE
+Ben,Quadinaros,BQ,65,none,masculine,Toong,Tund,64.1731,FALSE
+Ayla,Secura,AS,55,none,feminine,Twi'lek,Ryloth,70.0786,FALSE
+Anakin,Skywalker,AS,84,blond,masculine,Human,Tatooine,74.01559999999999,FALSE
+Luke,Skywalker,LS,77,blond,masculine,Human,Tatooine,67.7164,FALSE
+Shmi,Skywalker,SS,NA,black,feminine,Human,Tatooine,64.1731,FALSE
+Han,Solo,HS,80,brown,masculine,Human,Corellia,70.866,TRUE
+Lama,Su,LS,88,none,masculine,Kaminoan,Kamino,90.15729999999999,FALSE
+Wicket,Systri Warrick,WS,20,brown,masculine,Ewok,Endor,34.6456,TRUE
+Wat,Tambor,WT,48,none,masculine,Skakoan,Skako,75.9841,FALSE
+Wilhuff,Tarkin,WT,NA,"auburn, grey",masculine,Human,Eriadu,70.866,FALSE
+Roos,Tarpals,RT,82,none,masculine,Gungan,Naboo,88.1888,FALSE
+Shaak,Ti,ST,57,none,feminine,Togruta,Shili,70.0786,FALSE
+Saesee,Tiin,ST,NA,none,masculine,Iktotchi,Iktotch,74.01559999999999,FALSE
+Jek,Tono Porkins,JT,110,brown,NA,NA,Bestine IV,70.866,TRUE
+Ratts,Tyerel,RT,15,none,masculine,Aleena,Aleen Minor,31.1023,FALSE
+Gregar,Typho,GT,85,black,NA,NA,Naboo,72.8345,FALSE
+Luminara,Unduli,LU,56.2,black,feminine,Mirialan,Mirial,66.929,FALSE
+Darth,Vader,DV,136,none,masculine,Human,Tatooine,79.5274,FALSE
+Finis,Valorum,FV,NA,blond,masculine,Human,Coruscant,66.929,FALSE
+Taun,We,TW,NA,none,feminine,Kaminoan,Kamino,83.8581,FALSE
+Zam,Wesell,ZW,55,blonde,feminine,Clawdite,Zolan,66.1416,FALSE
+Beru,Whitesun Lars,BW,75,brown,feminine,Human,Tatooine,64.9605,TRUE
+Mace,Windu,MW,84,none,masculine,Human,Haruun Kal,74.01559999999999,FALSE
+Poggle,the Lesser,Pt,80,none,masculine,Geonosian,Geonosis,72.0471,FALSE
+Ackbar,NA,ANA,83,none,masculine,Mon Calamari,Mon Cala,70.866,FALSE
+BB8,NA,BNA,NA,none,masculine,Droid,NA,NA,FALSE
+Bossk,NA,BNA,113,none,masculine,Trandoshan,Trandosha,74.803,FALSE
+C-3PO,NA,CNA,75,bald,masculine,Droid,Tatooine,65.7479,FALSE
+Chewbacca,NA,CNA,112,brown,masculine,Wookiee,Kashyyyk,89.7636,TRUE
+Cordé,NA,CNA,NA,brown,NA,NA,Naboo,61.8109,TRUE
+Dooku,NA,DNA,80,white,masculine,Human,Serenno,75.9841,FALSE
+Dormé,NA,DNA,NA,brown,feminine,Human,Naboo,64.9605,TRUE
+Finn,NA,FNA,NA,black,masculine,Human,NA,NA,FALSE
+Gasgano,NA,GNA,NA,none,masculine,Xexto,Troiken,48.0314,FALSE
+Greedo,NA,GNA,74,bald,masculine,Rodian,Rodia,68.1101,FALSE
+Grievous,NA,GNA,159,none,masculine,Kaleesh,Kalee,85.0392,FALSE
+IG-88,NA,INA,140,none,masculine,Droid,NA,78.74,FALSE
+Ki-Adi-Mundi,NA,KNA,82,white,masculine,Cerean,Cerea,77.9526,FALSE
+Lobot,NA,LNA,79,none,masculine,Human,Bespin,68.8975,FALSE
+Palpatine,NA,PNA,75,grey,masculine,Human,Naboo,66.929,FALSE
+R2-D2,NA,RNA,32,bald,masculine,Droid,Naboo,37.7952,FALSE
+R4-P17,NA,RNA,NA,none,feminine,Droid,NA,37.7952,FALSE
+R5-D4,NA,RNA,32,bald,masculine,Droid,Tatooine,38.1889,FALSE
+Rey,NA,RNA,NA,brown,feminine,Human,NA,NA,TRUE
+Sebulba,NA,SNA,40,none,masculine,Dug,Malastare,44.0944,FALSE
+Tarfful,NA,TNA,136,brown,masculine,Wookiee,Kashyyyk,92.1258,TRUE
+Watto,NA,WNA,NA,black,masculine,Toydarian,Toydaria,53.9369,FALSE
+Yoda,NA,YNA,17,white,masculine,Yoda's species,NA,25.9842,FALSE
