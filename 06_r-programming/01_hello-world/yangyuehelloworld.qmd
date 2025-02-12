@@ -12,11 +12,41 @@ format: html
 library(stringr)
 
 # Define the hello_world() function
-# hello_world() takes arguments name (character), mood (character), and n_greet (number of greetings requested)
-hello_world <- function(name, mood) {
-  # set some possible greetings, character variables that may reference the name and mood arguments
-  greetings <- c(paste0("Hey", name, "what makes you", mood, "today?"), 
-                 paste0("Hey", name, "you look", mood, "today!"),
-                 paste0())
-}
+# hello_world() takes arguments name, mood, and n_greet (number of greetings requested)
+hello_world <- function(name, mood, n_greet) {
+  # Use tringr to manipulate the name argument
+  # Ensure the name is in title case
+  name <- str_to_title(str_to_lower(name))
+  
+  # Below are some possible greetings, character variables that may reference the name and mood arguments
+  greetings <- c(paste0("Hey ", name, "! what makes you ", mood, " today?"), 
+                 paste0("Hey ", name, "! you look ", mood, " today!"),
+                 paste0("OMG Hey! ", name, " Keep up the ", mood, " energy!"),
+                 paste0("What's up ", name, "? Feeling ", mood, " ?"))
+  # Start the counter at n_greet = 1 
+  count <- n_greet
+  
+  # If n=0, we don't want any greetings
+  if (n_greet == 0) {
+        return(paste0("Nevermind, ", name, ".", " See ya!")) # Say something other than greetings
+    } else {
+      # Use a while loop to print greetings
+        while(count > 0) { # Keep running while count is greater than 0
+            print(sample(greetings, 1)) # if yes, print out a random greeting from my list (if no, while loop ends)
+            count <- count - 1 # decrease the counter
+        }
+        
+        # Use a for loop to display a summary of greetings
+        for (j in seq_len(n_greet)) {
+    cat(paste0("Message ", j, ": ", sample(greetings, 1), "\n"))
+        }
+    }
+} # end hello_world function define
+
+# Call the function with different sets of arguments
+hello_world("Yangyue", "happy", 3) # Example 1: Happy mood
+hello_world("Olivia", "excited", 5) # Example 2: Excited mood
+hello_world("EVE", "tired", 0) # Example 3: No greetings requested
+
+  
 ```
