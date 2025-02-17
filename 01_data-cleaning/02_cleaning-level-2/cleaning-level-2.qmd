@@ -86,13 +86,27 @@ QUESTIONS:
 
 <!-- answer below -->
 
+a. Column names are inconsistent
+  i. Messy dataset has different column names and has typos
+b. Data types are incorrect 
+  i. Some numeric columns in the messy dataset are stored as character instead of numeric
+c. Inconsistent county and state formatting
+  i. Some county names have numbers or special characters
+  ii. State names are abbreviated inconsistently
+
 2. What are the biggest issues you need to address in cleaning?
 
 <!-- answer below -->
 
+a. Fix inconsistent column names
+b. Correct data types
+c. Standardize county and state names
+
 3. Are there any differences between the messy dataset and the original dataset that you do not need or want to address in cleaning? If so, why (not)?
 
 <!-- answer below -->
+
+Maybe the few missing values? There are only few missing data, it's not neccessary to get rid of them.
 
 4. Are there additional cleaning tasks you would like to perform beyond matching the original dataset? If so, what are they and why do you think they are important?
 
@@ -106,37 +120,135 @@ If you're not sure where to start, you can organize your cleaning into the follo
 
 You can additionally/alternatively construct your cleaning in a single pipeline in the last chunk.
 
-## Selecting, renaming, and reordering columns
+## Read and write out dataset
 
 ```{r}
-
-```
-
-## Changing data types
-
-```{r}
-
+library(readr)
+messy.midwest <- read_csv("messy-midwest.csv")
+write_csv(midwest, "midwest.csv")
 ```
 
 
-## Mutating data
+## Comparing datasets
 
 ```{r}
+#| label: compare-datasets
 
+# Compare the messy and original datasets using all.equal()
+all.equal(messy.midwest, midwest)
+```
+
+
+## Creat a clean dataset
+
+```{r}
+#| label: make-cleaning-dataset
+
+# Create a dataset to work with during the cleaning process called "clean.midwest"
+clean.midwest <- messy.midwest
+
+# Check the names and order of columns in midwest:
+colnames(midwest)
+
+# Check the names and order of columns in messy.midwest:
+colnames(messy.midwest)
+```
+
+
+## Change data types
+
+```{r}
+# change data types from character to numeric 
+library(dplyr)
+clean.midwest <- clean.midwest %>%
+  mutate(across(where(~ all(grepl("^-?\\d*\\.?\\d*$", ., perl = TRUE) | is.na(.))), as.numeric))
+  
+```
+
+
+## Rename and mutate columns
+
+```{r}
+# Rename columns to match the original midwest dataset with rename()
+clean.midwest <- clean.midwest %>%
+  rename(
+    county = `C0unty Name`,
+    state = `State`,
+    area = `Area (sq miles)`,
+    poptotal = `Total P0pulation`,
+    popdensity = `Population Density`,
+    #popwhite, popblack, popamerindian, popasian, popother, percblack, percamerindan, percother, 
+    popadults = `Population Over 18`,
+    #perchsd, percprof, poppovertyknown, percpovertyknown,
+    percollege = `Percentage College`,
+    percbelowpoverty = `Percentage Below Poverty`,
+    percasian = `Percentage Asian`,
+    #percchildbelowpovert, percadultpoverty, percelderlypoverty, inmetro, category
+  )%>%
+  mutate(
+    percwhite = (popwhite / poptotal) * 100, # Calculate percentage of white population
+    percblack = (popblack / poptotal) * 100 # Calculate percentage of black population
+  )
+
+```
+
+
+## Reorder columns
+
+```{r}
+clean.midwest <- clean.midwest %>% 
+ select(PID, county, state, area, poptotal, popdensity, popwhite, popblack, popamerindian, popasian, popother, percwhite, percblack, percamerindan, percasian, percother, popadults, perchsd, percollege, percprof, poppovertyknown, percpovertyknown, percbelowpoverty, percchildbelowpovert, percadultpoverty, percelderlypoverty, inmetro, category)
 ```
 
 
 ## Using stringr and forcats
 
 ```{r}
+#| label: format the state column
+state_mappings <- c(
+    "Wis." = "WI",
+    "Wisconsin" = "WI",
+    "Mich." = "MI",
+    "Michigan" = "MI",
+    "Ind." = "IN",
+    "Indiana" = "IN",
+    "Ill." = "IL",
+    "Illinois" = "IL",
+    "OHIO" = "OH",
+    "Ohio" = "OH"
+  )
 
+
+# Clean county names
+  clean1.midwest <- clean.midwest %>%
+    mutate(
+      county = str_trim(county),                         # Remove leading/trailing spaces
+      county = str_replace_all(county, "1", "l"),        # Replace '1' with 'l'
+      county = str_replace_all(county, "0", "o"),        # Replace '0' with 'o'
+      county  = str_replace_all(county, "3", "e"),       # Replace '3' with 'e'
+      county = str_to_upper(county),                 # Uppercase every letter 
+      state = ifelse(state %in% names(state_mappings), 
+                    state_mappings[state], 
+                    state)
+    )
+  view(clean1.midwest)
 ```
 
+```{r}
+# compare clean1.midwest and midwest
+all.equal(clean1.midwest, midwest)
+```
 
 ## Other cleaning tasks
 
 ```{r}
+#| label: sort data
 
+#c Sort data by PID
+clean1.midwest <- clean1.midwest %>%
+  arrange(PID)
+
+all.equal(clean1.midwest, midwest)
 ```
 
 
@@ -162,13 +274,21 @@ QUESTIONS:
 
 <!-- answer below -->
 
+Not exactly identical. 
+a. There is one string mismatch in the column 'county'.
+b. There are a few missing data.
+
 2. Did you make any choices to clean the data that resulted in the dataset not matching the original? Why did you make those choices?
 
 <!-- answer below -->
 
+No I just leave those there.
+
 3. Were there any cleaning steps -- whether necessary to recreate the original df or just because you wanted to do them -- that you weren't able to implement? If so, what were they and what more would you need to do/know to implement them? 
 
 <!-- answer below -->
+
+
 
 
 # Unguided cleaning and transformation
