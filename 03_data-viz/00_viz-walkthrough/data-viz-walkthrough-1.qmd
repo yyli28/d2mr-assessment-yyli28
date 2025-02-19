@@ -209,7 +209,7 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
 
 Is this a better plot? Not really. But you can see how much more you can do with ggplot2 than with base R or lattice, and you can see how much power the `theme()` layer holds for customization.
 
-The complement of this customizability is ggplot's flexibility when it comes to actually mapping data. Using the same simple dataset and mappings, you can create a wide variety of plots. 
+The complement of this customizability is ggplot's flexibility when it comes to actually mapping data. Using the same simple dataset and mappings, you can create a wide variety of plots.
 
 Here's a simple example using the `iris` dataset to show the distribution of sepal length by species using a violin plot and overlaid boxplot:
 
@@ -236,7 +236,6 @@ ggplot(aes(x=Value, fill=Species)) +
   labs(title="Density Distributions of Iris Measurements",
        x="Measurement Value (cm)")
 ```
-
 
 ### The ggplot2 Package
 
@@ -273,7 +272,7 @@ You don't have to have everything in that order, and you don't even need to have
 
 ## Basic layer structure of ggplots
 
-Any ggplot begins with the `ggplot()` function, which sets up the basic plot structure. From there, you add layers to the plot to create the final visualization. You add layers with the `+` operator, which has a similar effect to the pipe operator `%>%`: it takes what you've got and sends it to the next line without ending any ongoing execution. The pipe says "keep transforming the data" and the `+` says "keep adding layers to the same plot." 
+Any ggplot begins with the `ggplot()` function, which sets up the basic plot structure. From there, you add layers to the plot to create the final visualization. You add layers with the `+` operator, which has a similar effect to the pipe operator `%>%`: it takes what you've got and sends it to the next line without ending any ongoing execution. The pipe says "keep transforming the data" and the `+` says "keep adding layers to the same plot."
 
 Here's a simple example that includes all the layer types:
 
@@ -353,8 +352,6 @@ ggplot(iris) +
   
 
 ```
-
-
 
 There are multiple ways to input these core layers. The above makes it most clear that each is actually an individual layer, but more commonly you'll see them combined in some way. The following are all identical to each other and to the plot above.
 
@@ -563,7 +560,7 @@ The table below lists some of the most commonly used aesthetic arguments. The "m
 #### aes reference table
 
 | Aesthetic | Description | Mapped data | Unmapped specs |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | `x` and `y` (position) | x and y coordinates of the plot. Nearly every plot requires at least one of these "position" aesthetics. | continuous, categorical | n/a |
 | `group` | How observations are grouped together (if not defined with another grouping aes) | categorical | n/a |
 | `color` | Color of points, lines, text, and other 1D shapes. For filled shapes, this will be the outline color. | continuous, categorical | string (standard color name or hex code) |
@@ -577,7 +574,6 @@ The table below lists some of the most commonly used aesthetic arguments. The "m
 | `label` | Text content | continuous, categorical | strings |
 | `fontface` | Font style for text | categorical | String: `"plain"`, `"bold"`, `"italic"`, or `"bold.italic"` |
 | `family` | Font family for text | categorical | String with font name, dependent on user's system font options |
-
 
 Let's look at very simple examples of (most of) these in action. We haven't talked about geom options yet, so we're just going to use two: `geom_point()` creates a scatterplot and `geom_smooth(method = "lm")` which draws a simple linear regression line with a shaded standard error band.
 
@@ -635,8 +631,6 @@ ggplot(iris) +
 
 ```
 
-
-
 ```{r}
 
 #| label: aes-fill
@@ -692,8 +686,6 @@ ggplot(iris) +
 
 
 ```
-
-
 
 ```{r}
 
@@ -756,9 +748,6 @@ ggplot(iris) +
 
 ```
 
-
-
-
 ```{r}
 
 #| label: aes-size
@@ -784,9 +773,6 @@ ggplot(iris) +
 
 
 ```
-
-
-
 
 *Text*
 
@@ -844,21 +830,20 @@ ggplot(iris) +
 
 ```
 
-
-That's not all the aesthetics included in the table above, much less all the aesthetics you can use in ggplot2, but it should give you a sense of the kinds of options you have and the kinds of limitations you can encounter. The best way to learn about aesthetics is just to mess around with them. 
+That's not all the aesthetics included in the table above, much less all the aesthetics you can use in ggplot2, but it should give you a sense of the kinds of options you have and the kinds of limitations you can encounter. The best way to learn about aesthetics is just to mess around with them.
 
 ### Geometries
 
 The geometries layer is where you define the shape of the plot. This is where you specify the type of plot you're making -- scatterplot, line graph, bar chart, etc. You can have one or multiple geometries in a single plot, and you can specify different aesthetics and unmapped visual specifications for each geometry layer.
 
-The table below lists some of the most commonly used geometries. The 
+The table below lists some of the most commonly used geometries. The
 
 #### geom reference table
 
 <!-- Again, this mess is a pandoc table. Render the qmd to see it displayed correctly. -->
 
 | Geom Layer | Variables | Description | Data Types | When to Use |
-|-|-|-|-|-|
+|----|----|----|----|----|
 | geom_histogram() | 1 | Creates bins and counts observations within each bin | Continuous x | To visualize distribution of a single continuous variable |
 | geom_density() | 1 | Creates a smoothed density estimate | Continuous x | To show the probability distribution of a continuous variable |
 | geom_boxplot() | 1-2 | Shows distribution summary with quartiles and outliers | Continuous y, Optional categorical x | To compare distributions across groups or show single variable distribution |
@@ -870,12 +855,9 @@ The table below lists some of the most commonly used geometries. The
 | geom_area() | 2 | Creates a line plot filled to the x-axis | Continuous x & y | To show cumulative or proportional values over time |
 | geom_tile() | 2-3 | Creates rectangles based on x and y positions | Any x & y, Optional fill | For heatmaps or visualizing matrices |
 
-
-
 Despite this being listed as the third layer, choosing your geometry is often the first thing you'll do when you're planning a plot. The geometry you choose will determine what kind of plot you're making, and that will determine what kind of data you need and what kind of aesthetics you can use.
 
 For the 1000th time, I'll remind you that one of the biggest strengths of ggplot is it's flexibility. It's awesome, but it also puts some pressure on you to make smart decisions. ggplot will let you get away with a lot of things that don't make sense, so you need to be thoughtful about what you're doing.
-
 
 #### 1 variable plots
 
@@ -955,7 +937,6 @@ ggplot(iris) +
 
 ```
 
-
 *Dot plot* - `geom_dotplot()`: A dot plot is used to show the distribution of a continuous variable. It's similar to a histogram, but instead of bars, it uses dots to represent the count of observations in each bin.
 
 ```{r}
@@ -995,8 +976,6 @@ ggplot(iris) +
   geom_dotplot(fill = "lightblue")
 
 ```
-
-
 
 #### 1-2 variable plots
 
@@ -1075,10 +1054,9 @@ ggplot(iris2) +
 
 ```
 
-
 *Boxplot* - `geom_boxplot()`: A boxplot is used to show distribution summary statistics with quartiles and outliers. It's a great way to compare distributions across groups or show the distribution of a single variable.
 
-Also, despite what nearly everyone does in practice, it's almost always a better choice for visualizing a comparisons of means than a bar chart. 
+Also, despite what nearly everyone does in practice, it's almost always a better choice for visualizing a comparisons of means than a bar chart.
 
 ```{r}
 
@@ -1120,7 +1098,6 @@ ggplot(iris2) +
 
 
 ```
-
 
 *Violin plot* - `geom_violin()`: A violin plot is used to show a density estimate symmetrically. Think of it like a combination of a density plot and a boxplot. Mentally rotate the density plot 90 degrees and then mirror it across a central axis. It's a great way to show the shape of a distribution across groups.
 
@@ -1185,7 +1162,6 @@ ggplot(iris2) +
 
 
 ```
-
 
 *Bar chart* - `geom_bar()`: A bar chart is a special kind of column chart (coming up) used to show counts of categorical variables. It creates bars with heights proportional to the number of cases in each category.
 
@@ -1293,7 +1269,6 @@ ggplot(iris2) +
 
 
 ```
-
 
 #### 2+ variable plots
 
@@ -1418,7 +1393,6 @@ ggplot(iris2) +
 
 ```
 
-
 *Area plot* - `geom_area()`: An area plot is used to create a line plot filled to the x-axis. It's used to show cumulative or proportional values over time. It's like a line plot, but the area under the line is filled in. Like a line plot, it's not very useful with unordered data, so these plots with iris data are pretty meaningless.
 
 ```{r}
@@ -1481,7 +1455,6 @@ ggplot(aes(x = Time, y = mean_weight, color = Diet)) +
 
 ```
 
-
 ```{r}
 
 #| label: chickweight-area
@@ -1543,38 +1516,30 @@ Need something else? ggplot can probably do it, you just need to find the right 
 
 *Text* - `geom_text()`: Text is used to add text to a plot. Add labels, annotations, or other text elements to your plot, mapped to the actual data (vs a labs layer or theme text element).
 
-
-
-
-
 # Part 2: Customizing plots: Themes, scales, and more
-
 
 ## Building on the Grammar of Graphics
 
-In Part 1, we covered the essential components of any ggplot visualization:
-- Data layer: The dataset being visualized
-- Aesthetics layer: Mapping data to visual properties
-- Geometries layer: The shapes used to represent the data
+In Part 1, we covered the essential components of any ggplot visualization: - Data layer: The dataset being visualized - Aesthetics layer: Mapping data to visual properties - Geometries layer: The shapes used to represent the data
 
 In Part 2, we'll cover the additional layers that allow for more sophisticated and customized visualizations:
 
-1. Scales: Control how data values map to visual properties
-2. Facets: Split your plot into multiple panels
-3. Themes: Customize non-data elements
-4. Coordinates: Modify the coordinate system (briefly)
-5. Statistics: Transform data for visualization (briefly)
+1.  Scales: Control how data values map to visual properties
+2.  Facets: Split your plot into multiple panels
+3.  Themes: Customize non-data elements
+4.  Coordinates: Modify the coordinate system (briefly)
+5.  Statistics: Transform data for visualization (briefly)
 
 Coordinate and statistics layers are more advanced, and covering them in detail is beyond the scope of the class. I've included simple examples of each to give you a sense of what they do, but you'll need to consult the ggplot2 documentation for more information.
 
 ### Scales Layer
 
 Scales control how data values are mapped to visual properties in your plot. Every aesthetic (color, size, shape, etc.) has an associated scale that can be modified. Scales apply to both axes and legends (they are both just aes mappings!), can be applied separately to each aesthetic, and can be customized in a variety of ways.
- 
+
 The general pattern for scale functions is `scale_<aesthetic>_<type>()`, where:
 
-- <aesthetic> is what visual property you're controlling (color, fill, size, etc.)
-- <type> is how you want to handle the data (continuous, discrete, manual, etc.)
+-   <aesthetic> is what visual property you're controlling (color, fill, size, etc.)
+-   <type> is how you want to handle the data (continuous, discrete, manual, etc.)
 
 It's usually more important to focus on the "type" part of the function. That's where the biggest differences between functions are. In other words, `scale_color_manual()` and `scale_fill_manual()` are very similar, but `scale_color_manual()` and `scale_color_continuous()` are very different.
 
@@ -1582,7 +1547,7 @@ Remember that many aesthetics work with both continuous and discrete data, which
 
 **Before we talk scale specifics, two things you need to know about what's happening in the background:**
 
-1. *Labels:* You're usually going to use `labs()` to change the axis and legend labels, but technically the `labs()` function isn't a "layer" the same way scales, facets, and themes are. It's a function that modifies the plot object, not a separate layer that gets added to the plot. When you use `labs()` to modify the labels/titles of axes and legends, you're basically using a helper/shortcut for modifying scale layers that already exist (whether you manually added them or not). That means what you're specifying with `labs()` is a direct alternative to the `name` argument in the scale functions:
+1.  *Labels:* You're usually going to use `labs()` to change the axis and legend labels, but technically the `labs()` function isn't a "layer" the same way scales, facets, and themes are. It's a function that modifies the plot object, not a separate layer that gets added to the plot. When you use `labs()` to modify the labels/titles of axes and legends, you're basically using a helper/shortcut for modifying scale layers that already exist (whether you manually added them or not). That means what you're specifying with `labs()` is a direct alternative to the `name` argument in the scale functions:
 
 ```{r}
 
@@ -1611,7 +1576,7 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
 
 ```
 
-2. *Defaults:* ggplot has default scales for each aesthetic, so you don't always need to specify them. If you don't specify a scale, ggplot will use the default scale for that aesthetic. The defaults are usually fine, but you'll want to specify scales when you need to customize them.
+2.  *Defaults:* ggplot has default scales for each aesthetic, so you don't always need to specify them. If you don't specify a scale, ggplot will use the default scale for that aesthetic. The defaults are usually fine, but you'll want to specify scales when you need to customize them.
 
 ```{r}
 
@@ -1636,14 +1601,13 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
 
 It's rare that you'll see scales named with the scale layer (instead of `labs()`), and maybe even rarer to see the default scales specified if they don't need to take any arguments for customization. Still, know that the scale layers always exist and are controlling everything about how your data is mapped to visual properties, including the accompanying text.
 
-
 #### Continuous scales
 
 Continuous scales work with numeric data. Common functions include:
 
-- `scale_x_continuous()` and `scale_y_continuous()` for axis positions
-- `scale_color_continuous()` and `scale_fill_continuous()` for colors
-- `scale_size_continuous()` for size mappings
+-   `scale_x_continuous()` and `scale_y_continuous()` for axis positions
+-   `scale_color_continuous()` and `scale_fill_continuous()` for colors
+-   `scale_size_continuous()` for size mappings
 
 You can replace x/y, color, fill, and size with any aesthetic using continuous data in your plot.
 
@@ -1653,9 +1617,9 @@ You can replace x/y, color, fill, and size with any aesthetic using continuous d
 
 This is the main thing you'll want to customize with continuous scales. The range of a scale is the minimum and maximum values of the scale. You can set the range of a scale with the `limits` argument. This is useful for zooming in on a specific part of the data or ensuring that multiple plots have the same scale.
 
-- `limits` set the minimum and maximum values of the scale
-- `breaks` set the tick marks on the scale
-- `labels` set the text of the tick marks
+-   `limits` set the minimum and maximum values of the scale
+-   `breaks` set the tick marks on the scale
+-   `labels` set the text of the tick marks
 
 ```{r}
 
@@ -1706,15 +1670,15 @@ These probably aren't arguments you need to focus on at this point, but you'll w
 
 You can use "transforms" to modify the data before it's mapped to the visual property. Common transforms include:
 
-- `trans = "log10"` for log transformations
-- `trans = "sqrt"` for square root transformations
-- `trans = "reverse"` for reversing the axis
+-   `trans = "log10"` for log transformations
+-   `trans = "sqrt"` for square root transformations
+-   `trans = "reverse"` for reversing the axis
 
 You can also use the function version of these instead of specifying them as arguments. These are basically "wrappers" for the `scale_*_continuous()` functions that have the `trans` argument set to a specific value already.
 
-- `scale_y_reverse()` for reversing the y-axis
-- `scale_x_log10()` for log transforming the x-axis
-- `scale_y_sqrt()` for square root transforming the y-axis
+-   `scale_y_reverse()` for reversing the y-axis
+-   `scale_x_log10()` for log transforming the x-axis
+-   `scale_y_sqrt()` for square root transforming the y-axis
 
 Some simple examples of how these transforms work:
 
@@ -1761,8 +1725,8 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, size = Petal.Length)) +
 
 *Color scales:*
 
-- `low` and `high` set the colors at the minimum and maximum values
-- `na.value` sets the color for missing values
+-   `low` and `high` set the colors at the minimum and maximum values
+-   `na.value` sets the color for missing values
 
 ```{r}
 
@@ -1788,7 +1752,7 @@ iris %>%
 
 ```
 
-You can do other very cool color stuff with continuous scales, like using color gradients, color palettes, and color brewer palettes using related functions from other packages. The most commonly used packages for this are `viridis` and `RColorBrewer`. 
+You can do other very cool color stuff with continuous scales, like using color gradients, color palettes, and color brewer palettes using related functions from other packages. The most commonly used packages for this are `viridis` and `RColorBrewer`.
 
 ```{r}
 
@@ -1813,14 +1777,13 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Sepal.Length)) +
 
 ```
 
-
 *Scale modifications:*
 
 You can also modify the scales themselves with the `guide` argument. The big one to remember here is how to hide the legend entirely.
 
-- `guide = "colorbar"` for a color bar legend
-- `guide = "legend"` for a legend
-- `guide = "none"` to remove the legend
+-   `guide = "colorbar"` for a color bar legend
+-   `guide = "legend"` for a legend
+-   `guide = "none"` to remove the legend
 
 ```{r}
 
@@ -1846,20 +1809,19 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Sepal.Length)) +
 
 Discrete scales work with categorical (factor) data. Common functions include:
 
-- `scale_x_discrete()` and `scale_y_discrete()` for axis positions
-- `scale_color_discrete()` and `scale_fill_discrete()` for colors
-- `scale_shape_discrete()` for shapes
-- `scale_linetype_discrete()` for line types
+-   `scale_x_discrete()` and `scale_y_discrete()` for axis positions
+-   `scale_color_discrete()` and `scale_fill_discrete()` for colors
+-   `scale_shape_discrete()` for shapes
+-   `scale_linetype_discrete()` for line types
 
 You can replace x/y, color, fill, shape, and linetype with any aesthetic using discrete data in your plot.
 
 The core arguments to know for discrete scales are `labels`, `name`, `limits`, and `breaks`. These operate similarly to their continuous counterparts, but since they use discrete data some of the arguments accept different kinds of values.
 
-- `labels` set the text of the tick marks
-- `name` sets the title of the legend
-- `limits` sets the order of the categories
-- `breaks` sets which values appear on the axis or in the legend
-
+-   `labels` set the text of the tick marks
+-   `name` sets the title of the legend
+-   `limits` sets the order of the categories
+-   `breaks` sets which values appear on the axis or in the legend
 
 ```{r}
 
@@ -1902,11 +1864,10 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, shape = Species)) +
 
 ```
 
-
 *Color scales:*
 
-- `palette` or `type` sets the color palette (depending on the function)
-- `na.value` sets the color for missing values
+-   `palette` or `type` sets the color palette (depending on the function)
+-   `na.value` sets the color for missing values
 
 Like with continuous scales, you can specify colors with the ggplot discrete scale functions, but you can also use color palettes from other packages. The most commonly used packages for this are (again) `viridis` and `RColorBrewer`, but my personal favorite package is `ggsci`, which includes themes from journals, universities, and TV shows.
 
@@ -1951,12 +1912,11 @@ ggplot(iris, aes(x = Species, y = Sepal.Length,  fill = Species)) +
 
 ```
 
-
 *Scale modifications:*
 
-- `guide` sets the type of legend 
-- `drop` removes unused levels
-- `direction` sets the order of the levels (like reverse)
+-   `guide` sets the type of legend
+-   `drop` removes unused levels
+-   `direction` sets the order of the levels (like reverse)
 
 ```{r}
 
@@ -2006,7 +1966,6 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, color = Species)) +
   scale_color_discrete(direction = 1)  # Keep the order of the levels (default)
 
 ```
-
 
 #### Manual scales
 
@@ -2065,27 +2024,26 @@ Facets create small multiples of your plot based on categorical (factor) variabl
 
 Facets are particularly useful when splitting across groups based on more than 2 variables, where using many colors or shapes would be confusing. They're also useful when you want to compare different groups side-by-side. Typical use cases:
 
-- You want to compare patterns across groups
-- You have too many groups to effectively use color, shape, linetype, etc aesthetics
-- You want to examine the same relationship across different subsets of your data
-- You need to maintain the same basic plot structure but show different aspects of the data
+-   You want to compare patterns across groups
+-   You have too many groups to effectively use color, shape, linetype, etc aesthetics
+-   You want to examine the same relationship across different subsets of your data
+-   You need to maintain the same basic plot structure but show different aspects of the data
 
 Since facets are essentially an alternative to grouping aesthetics, you'll usually want to play around a bit with different combinations of each to figure out a plot that best conveys the message you want to send.
 
 The main functions for facets are:
 
-- `facet_wrap()` for 1 variable (more common)
-- `facet_grid()` for 1 or 2 variables
+-   `facet_wrap()` for 1 variable (more common)
+-   `facet_grid()` for 1 or 2 variables
 
 The main arguments for facets are:
 
-- `nrow` and `ncol` to control the number of rows and columns
-- `scales` to control whether scales are free or fixed
-
+-   `nrow` and `ncol` to control the number of rows and columns
+-   `scales` to control whether scales are free or fixed
 
 #### facet_wrap
 
-`facet_wrap()` creates a grid of plots based on a single variable. It's useful when you have a single categorical variable you want to split your plot by. 
+`facet_wrap()` creates a grid of plots based on a single variable. It's useful when you have a single categorical variable you want to split your plot by.
 
 The first argument specifies the variable to facet by, in the syntax `~variable`.
 
@@ -2154,13 +2112,11 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 
 ```
 
-
 #### Labeller argument
 
 For aesthetics, you can use elements in the themes and scales layers to control the text that appears on the plot. Facets operate similarly to grouping aesthetics, but they are a different kind of layer, so they have their own way of controlling the text that appears on the panels.
 
-With either `facet_wrap()` or `facet_grid()`, you can use the `labeller` argument to control the text that appears on the panels. 
-
+With either `facet_wrap()` or `facet_grid()`, you can use the `labeller` argument to control the text that appears on the panels.
 
 ```{r}
 
@@ -2197,22 +2153,20 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 
 ```
 
-
 ### Themes Layer
 
 Theme layers control all visual elements of your plot that aren't mapped to data. This includes things like the background color, grid lines, axis labels, and legend position, and a *lot* more. There are literally hundreds theme elements you can modify, so you can really go crazy here if you want to.
 
-We won't talk about all 200+, but we'll cover the most common ones you'll want to use. 
+We won't talk about all 200+, but we'll cover the most common ones you'll want to use.
 
 The most commonly used theme functions actually don't modify any specific element at all; they set the overall look and feel of the plot by setting several (or many) elements at once. The theme layers built into ggplot2 that you'll see commonly are:
 
-- `theme_minimal()`: A minimalistic theme with no grid lines
-- `theme_classic()`: A classic theme with grid lines
-- `theme_bw()`: A black and white theme with no color
-- `theme_dark()`: A dark theme with dark background and light text
-- `theme_light()`: A light theme with light background and dark text
-- `theme_void()`: A blank theme with no elements at all
-
+-   `theme_minimal()`: A minimalistic theme with no grid lines
+-   `theme_classic()`: A classic theme with grid lines
+-   `theme_bw()`: A black and white theme with no color
+-   `theme_dark()`: A dark theme with dark background and light text
+-   `theme_light()`: A light theme with light background and dark text
+-   `theme_void()`: A blank theme with no elements at all
 
 ```{r}
 
@@ -2234,8 +2188,8 @@ base_plot + theme_void() + labs(title="theme_void")   # No elements at all
 
 The `papaja` package (**P**reparing **APA** **J**ournal **A**rticles) has a theme to style your plots in APA format: `papaja::theme_apa()`. It's a great shortcut for making your plots look professional and publication-ready, but if you use it you need to keep two things in mind.
 
-1) It's not perfect. You still need to check that your plots actually meet APA format.
-2) The `papaja` package is actually a whole suite of tools for creating APA-style documents that is really an alternative to using Quarto and the apaquarto extension. In theory, there's no reason why you can't use just the theme function integrated with Quarto, but you have to be prepared for solving potential conflicts.
+1)  It's not perfect. You still need to check that your plots actually meet APA format.
+2)  The `papaja` package is actually a whole suite of tools for creating APA-style documents that is really an alternative to using Quarto and the apaquarto extension. In theory, there's no reason why you can't use just the theme function integrated with Quarto, but you have to be prepared for solving potential conflicts.
 
 ```{r}
 
@@ -2255,10 +2209,10 @@ You can also modify individual elements of the plot with the `element_*` functio
 
 The most commonly used `element_*` functions are:
 
-- `element_blank()`: Remove an element
-- `element_rect()`: Add a rectangle
-- `element_line()`: Add a line
-- `element_text()`: Add text
+-   `element_blank()`: Remove an element
+-   `element_rect()`: Add a rectangle
+-   `element_line()`: Add a line
+-   `element_text()`: Add text
 
 Any time you want to customize something on the plot, you'll name the element you want to modify as the argument of the theme function, then use the `element_*` function to modify it.
 
@@ -2289,20 +2243,18 @@ base_plot +
 
 ```
 
-
 #### Text elements
 
 Text elements control the text on the plot. You can modify the size, color, font, and angle of the text. The most commonly used text elements are:
 
-- `axis.title`: Axis titles
-- `axis.text`: Axis labels
-- `plot.title`: Plot title
-- `strip.text`: Facet labels
-- `legend.title`: Legend title
-- `legend.text`: Legend labels
+-   `axis.title`: Axis titles
+-   `axis.text`: Axis labels
+-   `plot.title`: Plot title
+-   `strip.text`: Facet labels
+-   `legend.title`: Legend title
+-   `legend.text`: Legend labels
 
 Some have counterparts for specific elements, like `axis.title.x` and `axis.title.y` to modify just one axis title or the other, while `axis.title` modifies both at once.
-
 
 ```{r}
 
@@ -2348,15 +2300,14 @@ element_text(
 
 ```
 
-
 #### Line elements
 
 Line elements control the lines on the plot, modifying things like the color, size, and type of the lines. The most commonly used line elements are:
 
-- `axis.line`: Axis lines
-- `axis.ticks`: Axis tick marks
-- `panel.grid.major`: Major grid lines
-- `panel.grid.minor`: Minor grid lines
+-   `axis.line`: Axis lines
+-   `axis.ticks`: Axis tick marks
+-   `panel.grid.major`: Major grid lines
+-   `panel.grid.minor`: Minor grid lines
 
 ```{r}
 
@@ -2401,11 +2352,11 @@ element_line(
 
 Rectangle elements control the rectangles on the plot, modifying things like the fill color, outline color, and size of the rectangles. The most commonly used rectangle elements are:
 
-- `panel.background`: Background of the plot
-- `panel.border`: Border of the plot (why this is a rectangle element and not a line, I don't know)
-- `legend.background`: Background of the legend
-- `legend.box.background`: Border of the legend
-- `strip.background`: Background of the facet labels
+-   `panel.background`: Background of the plot
+-   `panel.border`: Border of the plot (why this is a rectangle element and not a line, I don't know)
+-   `legend.background`: Background of the legend
+-   `legend.box.background`: Border of the legend
+-   `strip.background`: Background of the facet labels
 
 ```{r}
 
@@ -2447,7 +2398,6 @@ element_rect(
 
 
 ```
-
 
 #### Creating your own themes
 
@@ -2495,9 +2445,6 @@ base_plot +
   
 ```
 
-
-
-
 ### Coordinates Layer (Brief)
 
 The coordinates layer controls how the position aesthetics (x and y) are interpreted and displayed on the plot. While most plots use the default Cartesian coordinate system, other systems can be useful for specific visualizations:
@@ -2523,16 +2470,14 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 
 You'll want to learn more about coord layers on your own when:
 
-- You're working with spatial data or maps
-- You need to create pie charts or some other specialized non-grid-based plots
-- You're working with a lot of categories or long labels that need a lot of space
-- You need to force equal scaling on the axes
-
-
+-   You're working with spatial data or maps
+-   You need to create pie charts or some other specialized non-grid-based plots
+-   You're working with a lot of categories or long labels that need a lot of space
+-   You need to force equal scaling on the axes
 
 ### Statistics Layer (Brief)
 
-Statistics layers perform statistical transformations on your data before plotting. Many geoms have default statistics (e.g., geom_bar() counts by default, geom_smooth() fits models). 
+Statistics layers perform statistical transformations on your data before plotting. Many geoms have default statistics (e.g., geom_bar() counts by default, geom_smooth() fits models).
 
 Often, though definitely not always, it's easier to do these transformations before plotting with dplyr or another data manipulation package. But sometimes it's easier to do it in the plot itself, especially if you're just exploring the data and don't want to create a new dataframe for every plot you make.
 
@@ -2563,19 +2508,14 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, color=Species)) +
 
 You'll want to learn more about stat layers on your own when:
 
-- You need to perform a statistical transformation on your data before plotting
-- You want to layer a statistical transformation on top of another geom
-- You need to fit a model to your data before plotting
-- You need to perform a statistical test on your data before plotting
-
-
-
+-   You need to perform a statistical transformation on your data before plotting
+-   You want to layer a statistical transformation on top of another geom
+-   You need to fit a model to your data before plotting
+-   You need to perform a statistical test on your data before plotting
 
 ### Putting It All Together
 
 Let's create a complex visualization using multiple layers. We'll u
-
-
 
 ```{r}
 
@@ -2656,5 +2596,3 @@ ggplot(diamonds,
 
 
 ```
-
-

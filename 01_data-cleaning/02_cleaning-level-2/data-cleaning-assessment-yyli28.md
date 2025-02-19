@@ -21,7 +21,7 @@ Mini-project title: Data cleaning level2
 
 Submission date: 2/17
 
-Project GitHub subdirectory URL:
+Project GitHub subdirectory URL: <https://github.com/yyli28/D2MR-Data-Cleaning-yyli28.git>
 
 URL or instructions to access additional materials, if needed:
 
@@ -480,6 +480,8 @@ If you believe you have demonstrated any of the above skills sufficiently to cou
 
 <!-- Explanation of demonstrated unassessed objectives below this line -->
 
+I used use frequent, informative comments in code and markdown.
+
 <!-- Explanation of demonstrated unassessed objectives above this line -->
 
 ### Off-the-syllabus skills evaluation
@@ -497,6 +499,8 @@ Optionally, you may provide a brief reflection on your experience with this proj
 Thoughtful reflections may earn engagement points.
 
 <!-- Reflection below this line -->
+
+This project provided a valuable hands-on experience in data cleaning. One of the biggest challenges in this assignment was the debugging process. Multiple unexpected issues arose that required careful troubleshooting. I did not realize I need to convert data type first until I failed computing the two missing columns. Then, data type conversion errors occurred when trying to mutate columns into numeric values. I tried many time to achieve that and for some reasons some approaches that work previously did not work, so it was a bit frustrating. If I were to approach this project again, I might focus on improving my workflow automation by writing reusable functions for data cleaning. Additionally, I might generate a new CSV file at each step of the cleaning process, ensuring that I can always revert to the previous version if needed.
 
 <!-- Do not edit below this line. -->
 
