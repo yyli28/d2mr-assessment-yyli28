@@ -510,7 +510,7 @@ It took me a while to refamiliarize myself with all of the functions and coding 
 -   Points toward unique objectives (up to 20): 4
 -   Additional points (up to 20): 3 unassessed
 -   TA provisional engagement points (up to 10): 4
--   Final approved engagement points (up to 10):
+-   Final approved engagement points (up to 10): 4
 -   Total points (up to 50):
 
 Engagement points are awarded for going above and beyond the expectations of the project and are not guaranteed on any given submission. Demonstrating the assessed learning objectives earns you points in those categories, but engagement points are awarded for exceptional effort, creativity, or skill.
@@ -518,7 +518,10 @@ Engagement points are awarded for going above and beyond the expectations of the
 TAs may recommend engagement points provisionally, but the instructor will make the final decision on engagement points.
 
 Mian: A good start! Beyond the comments left for specific objectives, a few practices where you could improve
+
         - Try more informative commit comments which helps with GitHub repository management
         - One chunk one thing. Now you are putting everying in one chunk, but we suggest you to put one thing in one chunk, like putting codes for loading libraries, function itself, and example runs on the functions separately. This is also one of the objective.
+
+ND: Nice work, Yangyue! Ditto what Mian said about commits and chunks. Lean into the best practices, you'll thank yourself later. :)
 
 Additional comments:
