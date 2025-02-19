@@ -100,9 +100,9 @@ Below each learning objective is a list of general expectations for meeting that
     2.  Uses more than one function to install/load/require packages
 
         -   [ ] Objective attempt
-        -   [check] Unique objective attempt
-        -   [ ] Objective met
-        -   Grader comments:
+        -   [x] Unique objective attempt
+        -   [x] Objective met
+        -   Grader comments: For "Uses more than one function to install/load/require packages", try `install()` and `require()`
 
 6.  Use arithmetic, comparison, and logical operators
 
@@ -111,8 +111,8 @@ Below each learning objective is a list of general expectations for meeting that
     2.  Uses multiple operators in data transformation pipelines and/or inline R code
 
         -   [ ] Objective attempt
-        -   [check] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Unique objective attempt
+        -   [x] Objective met
         -   Grader comments:
 
 7.  Parse and define functions and arguments
@@ -124,8 +124,8 @@ Below each learning objective is a list of general expectations for meeting that
     3.  Functions are well-documented with comments
 
         -   [ ] Objective attempt
-        -   [check] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Unique objective attempt
+        -   [x] Objective met
         -   Grader comments:
 
 8.  Parse and write conditional statements and/or loops
@@ -135,9 +135,9 @@ Below each learning objective is a list of general expectations for meeting that
     2.  Uses multiple types of conditional/loop functions (e.g., `if_else()`, `case_when()`, `for`, `while`)
 
         -   [ ] Objective attempt
-        -   [check ] Unique objective attempt
-        -   [ ] Objective met
-        -   Grader comments:
+        -   [x] Unique objective attempt
+        -   [x] Objective met
+        -   Grader comments: For "Uses conditional in multiple contexts, including dplyr pipelines", make sure you know how to apply it in other contexts like dplyr pipelines. The application is quite limited in the hello-world project.
 
 ### Tidyverse
 
@@ -172,9 +172,9 @@ Below each learning objective is a list of general expectations for meeting that
     2.  Uses `stringr` functions in a data transformation pipeline
 
         -   [ ] Objective attempt
-        -   [check ] Unique objective attempt
+        -   [x] Unique objective attempt
         -   [ ] Objective met
-        -   Grader comments:
+        -   Grader comments: I'm leaving this one not met as a data transformation pipeline is not included in the project. Objective 8 is partially met for the same reason and I checked that one as met.
 
 12. Use `forcats` functions to work with factor variables
 
@@ -505,16 +505,20 @@ It took me a while to refamiliarize myself with all of the functions and coding 
 
 ## Grader feedback
 
--   Grader:
--   Date:
--   Points toward unique objectives (up to 20):
--   Additional points (up to 20):
--   TA provisional engagement points (up to 10):
+-   Grader: Mian
+-   Date: Feb 18, 2025
+-   Points toward unique objectives (up to 20): 4
+-   Additional points (up to 20): 3 unassessed
+-   TA provisional engagement points (up to 10): 4
 -   Final approved engagement points (up to 10):
 -   Total points (up to 50):
 
 Engagement points are awarded for going above and beyond the expectations of the project and are not guaranteed on any given submission. Demonstrating the assessed learning objectives earns you points in those categories, but engagement points are awarded for exceptional effort, creativity, or skill.
 
 TAs may recommend engagement points provisionally, but the instructor will make the final decision on engagement points.
+
+Mian: A good start! Beyond the comments left for specific objectives, a few practices where you could improve
+        - Try more informative commit comments which helps with GitHub repository management
+        - One chunk one thing. Now you are putting everying in one chunk, but we suggest you to put one thing in one chunk, like putting codes for loading libraries, function itself, and example runs on the functions separately. This is also one of the objective.
 
 Additional comments:
