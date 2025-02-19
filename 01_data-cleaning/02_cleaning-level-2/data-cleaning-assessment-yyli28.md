@@ -480,7 +480,7 @@ If you believe you have demonstrated any of the above skills sufficiently to cou
 
 <!-- Explanation of demonstrated unassessed objectives below this line -->
 
-I used use frequent, informative comments in code and markdown.
+I used use frequent, informative comments in code and markdown. I found and understood documentation for R packages and functions. I followed a coding style guide. I named and differentiated R data types.
 
 <!-- Explanation of demonstrated unassessed objectives above this line -->
 
