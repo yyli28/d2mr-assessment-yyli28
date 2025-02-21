@@ -2,7 +2,6 @@
 title: "Level 1 Data Wrangling: Recreate a starwars Dataset"
 ---
 
-
 # Objective
 
 The objective of this assignment is to practice transforming dataset using (primarily) tidyverse functions. You will use skills like renaming and reordering columns, sorting rows, changing data types, mutating data, and using the stringr and forcats packages.
@@ -29,11 +28,14 @@ Run this chunk to see what your end product should look like:
 
 #| label: load-goal-tibble
 
-sw.wrangled.goal <- read_csv("assessment/recreate-level-1/sw-wrangled.csv") %>% 
+sw.wrangled.goal <- read_csv("sw-wrangled.csv") %>% 
    mutate(across(c(hair, gender, species, homeworld), factor)) # this is a quick-and-dirty fix to account for odd importing behavior
 
 # View in console
 sw.wrangled.goal 
+
+view(starwars)
+str(starwars)
 
 ```
 
@@ -95,10 +97,9 @@ Start by saving the `starwars` dataset to a new tbl called `sw.wrangled`. You wi
 
 ```
 
-
 QUESTION:
 
-1. What is the point of duplicating the `starwars` dataset to a new tbl called `sw.wrangled` rather than working directly with the `starwars` dataset?
+1.  What is the point of duplicating the `starwars` dataset to a new tbl called `sw.wrangled` rather than working directly with the `starwars` dataset?
 
 <!-- answer below -->
 
@@ -112,7 +113,7 @@ If you get stuck, use comments to "hold space" for where you know code needs to 
 
 ## Identify differences
 
-Before you start making changes to the `sw.wrangled` dataset, identify the differences between the `sw.wrangled` and `sw.wrangled.goal` datasets. There are multiple ways to do this, but I suggest using the `all.equal()` function. 
+Before you start making changes to the `sw.wrangled` dataset, identify the differences between the `sw.wrangled` and `sw.wrangled.goal` datasets. There are multiple ways to do this, but I suggest using the `all.equal()` function.
 
 ```{r}
 
@@ -129,7 +130,7 @@ PLAN: Create a plan to address the differences between the `sw.wrangled` and `sw
 
 ## Recreate goal data
 
-In this assignment, you'll make the necessary changes in individual steps in their own chunks, iteratively updating and saving `sw.wrangled`. In a real-world scenario, you would probably combine some or all of these steps into a single chunk. You'll have a chance to do that later. 
+In this assignment, you'll make the necessary changes in individual steps in their own chunks, iteratively updating and saving `sw.wrangled`. In a real-world scenario, you would probably combine some or all of these steps into a single chunk. You'll have a chance to do that later.
 
 **As you work,** add unique, informative chunk labels (using comment syntax: `#|: chunk-label`) and comments to explain your thought process and the steps you are taking.
 
@@ -209,10 +210,9 @@ In this assignment, you'll make the necessary changes in individual steps in the
 
 ```
 
-
 ## OPTIONAL: Combine steps into a single pipeline
 
-Combine all the steps above into a single pipeline. 
+Combine all the steps above into a single pipeline.
 
 QUESTION: What are the advantages and disadvantages of combining all the steps into a single pipeline in a single chunk?
 
@@ -223,6 +223,32 @@ QUESTION: What are the advantages and disadvantages of combining all the steps i
 ```{r}
 #| label: single-pipe
 
+sw.wrangled <- starwars %>%
+  select(name, height, mass, hair_color, gender, species, homeworld) %>%
+  rename(height_cm = height,
+         hair = hair_color) %>%
+  filter(!is.na(height_cm)) %>%
+  separate(name, into = c("first_name", "last_name"), sep = " ", extra = "merge") %>%
+  mutate(hair = as.character(hair)) %>%
+  mutate(hair = replace_na(hair, "bald")) %>%
+  mutate(
+    gender = tolower(substr(as.character(gender), 1, 1)),
+    species = toupper(as.character(species))
+  ) %>%
+  mutate(across(c(hair, gender, species, homeworld), factor)) %>%
+  # Updated height_in calculation to match goal dataset exactly
+  mutate(height_in = as.numeric(format(height_cm*0.3937, digits = 6))) %>%
+  mutate(brown_hair = str_detect(hair, "brown")) %>%
+  mutate(initials = paste0(
+    substr(first_name, 1, 1),
+    substr(last_name, 1, 1)
+  )) %>%
+  select(first_name, last_name, initials, height_in, height_cm, mass, 
+         hair, gender, species, homeworld, brown_hair) %>%
+  arrange(last_name, first_name)
+
+all.equal(sw.wrangled, sw.wrangled.goal)
+view(sw.wrangled)
 
 ```
 
@@ -246,10 +272,9 @@ QUESTION: Are there any issues you cannot resolve? If so, list out the issues an
 
 # OPTIONAL: Unguided cleaning and transformation
 
-*Optional:* If you have the time and interest, continue transforming this dataset as you please in a new dataframe called `sw.optional`. **DO NOT SAVE OVER YOUR `sw.wrangled` DATAFRAME.** Create new columns based on the existing ones, reformat strings, try your hand at a regex replacement, summarize by groups (factor levels), visualize a simple relationship, or anything else you can think of. You can do this in addition to or instead of the additional cleaning tasks above. 
+*Optional:* If you have the time and interest, continue transforming this dataset as you please in a new dataframe called `sw.optional`. **DO NOT SAVE OVER YOUR `sw.wrangled` DATAFRAME.** Create new columns based on the existing ones, reformat strings, try your hand at a regex replacement, summarize by groups (factor levels), visualize a simple relationship, or anything else you can think of. You can do this in addition to or instead of the additional cleaning tasks above.
 
-You can do these transformations one pipe/chunk or several. Either way, include appropriate chunk labels as well as comments to explain your thought process and the steps you are taking. 
-
+You can do these transformations one pipe/chunk or several. Either way, include appropriate chunk labels as well as comments to explain your thought process and the steps you are taking.
 
 ```{r}
 
@@ -274,19 +299,18 @@ If you would like to export your dataframe(s) to a .csv file, you can use the `w
 
 ```
 
-
 # Submission
 
-Before submitting, double check that your `sw.wrangled` dataframe matches the `sw.wrangled.goal` dataframe. If you optionally chose to continue transforming, that should be a *different dataframe.* 
+Before submitting, double check that your `sw.wrangled` dataframe matches the `sw.wrangled.goal` dataframe. If you optionally chose to continue transforming, that should be a *different dataframe.*
 
 To submit:
 
-1. Add & modify the `assessment.md` in this mini-project's directory:
-    1. Check off all objectives you believe you have demonstrated
-    2. Indicate which objectives you are meeting for the first time (if any)
-    3. Complete any relevant open-ended items
-2. Push your changes to your centralized assignment repository on GitHub. 
-3. Confirm that Dr. Dowling and your section TA are added as collaborators to your repository.
-4. Submit your work in your next open mini-project assignment by including the following information in the text box:
-    1. The title of the assignment: "Level 1 Data Wrangling: Recreate a starwars Dataset"
-    2. A link to the **directory** for this assignment in your centralized assignment repo
+1.  Add & modify the `assessment.md` in this mini-project's directory:
+    1.  Check off all objectives you believe you have demonstrated
+    2.  Indicate which objectives you are meeting for the first time (if any)
+    3.  Complete any relevant open-ended items
+2.  Push your changes to your centralized assignment repository on GitHub.
+3.  Confirm that Dr. Dowling and your section TA are added as collaborators to your repository.
+4.  Submit your work in your next open mini-project assignment by including the following information in the text box:
+    1.  The title of the assignment: "Level 1 Data Wrangling: Recreate a starwars Dataset"
+    2.  A link to the **directory** for this assignment in your centralized assignment repo
