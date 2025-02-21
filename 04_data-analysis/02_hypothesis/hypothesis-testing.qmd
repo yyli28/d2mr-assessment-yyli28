@@ -1,5 +1,5 @@
 ---
-title: Hypothesis Testing - INSTRUCTOR ONLY
+title: Hypothesis Testing
 format: 
   #pdf: default
   html: default
