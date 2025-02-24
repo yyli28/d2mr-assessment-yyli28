@@ -302,10 +302,11 @@ You can do these transformations one pipe/chunk or several. Either way, include 
 
 #| label: rename-me-to-something-sensible
 
-sw.optional <- sw.wrangled
+sw.optional <- sw.wrangled %>%
   # Add a BMI calculation 
-  mutate(height_m = height_cm / 100),
-  bmi = ifelse(!is.na(mass) & height_m > 0, mass / (height_m^2), NA),
+  mutate(
+    height_m = height_cm / 100,
+    bmi = ifelse(!is.na(mass) & height_m > 0, mass / (height_m^2), NA),
     
     # Create height category using comparison operators
     height_category = case_when(
@@ -314,7 +315,7 @@ sw.optional <- sw.wrangled
       height_cm < 180 ~ "Medium",
       height_cm < 210 ~ "Tall",
       TRUE ~ "Very Tall"
-    ),
+    )),
 
     
 
