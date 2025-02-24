@@ -121,6 +121,7 @@ Before you start making changes to the `sw.wrangled` dataset, identify the diffe
 
 # Use the all.equal() function to compare the two datasets
 
+all.equal(sw.wrangled, sw-wrangled)
 
 # If the all.equal() function returns a message, read it carefully to understand the differences between the two datasets.
 
@@ -140,41 +141,55 @@ In this assignment, you'll make the necessary changes in individual steps in the
 
 # Select only needed columns & rename height (to height_cm) and hair_color (to hair)
 
-
+sw.wrangled <- starwars %>%
+  select(name, height, mass, hair_color, gender, species, homeworld) %>%
+  rename(height_cm = height,
+         hair = hair_color)
 ```
 
 ```{r}
 
 # Filter out any rows where height data is missing
 
-
+sw.wrangled <- sw.wrangled %>%
+filter(!is.na(height_cm))
 ```
 
 ```{r}
 
 # Break names into two columns (first_name, last_name); use first space " " as delimiter
 
-
+sw.wrangled <- sw.wrangled %>%
+separate(name, into = c("first_name", "last_name"), sep = " ", extra = "merge")
 
 ```
 
 ```{r}
 # Change categorical variables (but currently character) to factors
 
-
+sw.wrangled <- sw.wrangled %>%
+  mutate(hair = as.character(hair)) %>%
+  mutate(
+    gender = tolower(substr(as.character(gender), 1, 1)),
+    species = toupper(as.character(species))
+  ) %>%
+  mutate(across(c(hair, gender, species, homeworld), factor))
 ```
 
 ```{r}
 
 # Create a second height column by converting cm to inches
 
-
+sw.wrangled <- sw.wrangled %>%
+  mutate(height_in = as.numeric(format(height_cm*0.3937, digits = 6)))
 ```
 
 ```{r}
 # where there is no value in hair, use value "bald"
 
-
+sw.wrangled <- sw.wrangled %>%
+  mutate(hair = as.character(hair)) %>%
+  mutate(hair = replace_na(hair, "bald"))
 
 ```
 
@@ -182,7 +197,8 @@ In this assignment, you'll make the necessary changes in individual steps in the
 
 # create a logical variable that returns true if "brown" is anywhere in the string value for hair 
 
-
+sw.wrangled <- sw.wrangled %>%
+  mutate(brown_hair = str_detect(hair, "brown"))
 
 ```
 
@@ -190,7 +206,11 @@ In this assignment, you'll make the necessary changes in individual steps in the
 
 # create an initials column by concatenating the first characters of the first and last name
 
-
+w.wrangled <- sw.wrangled %>%
+  mutate(initials = paste0(
+    substr(first_name, 1, 1),
+    substr(last_name, 1, 1)
+  ))
 
 ```
 
@@ -198,7 +218,9 @@ In this assignment, you'll make the necessary changes in individual steps in the
 
 # Rearrange height_in and initials columns
 
-
+sw.wrangled <- sw.wrangled %>%
+  select(first_name, last_name, initials, height_in, height_cm, mass, 
+         hair, gender, species, homeworld, brown_hair)
 
 ```
 
@@ -206,7 +228,8 @@ In this assignment, you'll make the necessary changes in individual steps in the
 
 # Sort by last_name and then (when last_name matches) by first_name 
 
-
+w.wrangled <- sw.wrangled %>%
+  arrange(last_name, first_name)
 
 ```
 
@@ -236,7 +259,6 @@ sw.wrangled <- starwars %>%
     species = toupper(as.character(species))
   ) %>%
   mutate(across(c(hair, gender, species, homeworld), factor)) %>%
-  # Updated height_in calculation to match goal dataset exactly
   mutate(height_in = as.numeric(format(height_cm*0.3937, digits = 6))) %>%
   mutate(brown_hair = str_detect(hair, "brown")) %>%
   mutate(initials = paste0(
@@ -247,7 +269,7 @@ sw.wrangled <- starwars %>%
          hair, gender, species, homeworld, brown_hair) %>%
   arrange(last_name, first_name)
 
-all.equal(sw.wrangled, sw.wrangled.goal)
+all.equal(sw.wrangled, sw-wrangled)
 view(sw.wrangled)
 
 ```
@@ -261,7 +283,7 @@ Check that your `sw.wrangled` dataframe is identical to the goal dataframe using
 
 # Use all.equal()
 
-
+all.equal(sw.wrangled, sw-wrangled)
 ```
 
 Use any returned information about mismatches to adjust your code as needed.
@@ -281,7 +303,20 @@ You can do these transformations one pipe/chunk or several. Either way, include 
 #| label: rename-me-to-something-sensible
 
 sw.optional <- sw.wrangled
-  # your code here
+  # Add a BMI calculation 
+  mutate(height_m = height_cm / 100),
+  bmi = ifelse(!is.na(mass) & height_m > 0, mass / (height_m^2), NA),
+    
+    # Create height category using comparison operators
+    height_category = case_when(
+      height_cm < 100 ~ "Very Short",
+      height_cm < 150 ~ "Short", 
+      height_cm < 180 ~ "Medium",
+      height_cm < 210 ~ "Tall",
+      TRUE ~ "Very Tall"
+    ),
+
+    
 
 ```
 
@@ -293,6 +328,8 @@ If you would like to export your dataframe(s) to a .csv file, you can use the `w
 #| label: export-data
 
 # Write sw.wrangled to a .csv file
+
+write_csv(sw.wrangled, "sw-wrangled-output.csv")
 
 # Write sw.optional to a .csv file
 
