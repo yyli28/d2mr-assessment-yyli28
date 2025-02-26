@@ -8,10 +8,10 @@ This document tracks your progress meeting 20 unique objectives across all mini-
 
 ## GitHub and R Studio
 
-1.  [ ] Create and maintain a repo with sensible organization and naming conventions
-2.  [ ] Maintain an informative and up-to-date README.md
-3.  [ ] Integrate a GitHub repo with an R studio project, including .gitignore file
-4.  [ ] Effectively use version control
+1.  [x] Create and maintain a repo with sensible organization and naming conventions
+2.  [x] Maintain an informative and up-to-date README.md
+3.  [x] Integrate a GitHub repo with an R studio project, including .gitignore file
+4.  [x] Effectively use version control
 
 ## R programming
 
@@ -22,9 +22,9 @@ This document tracks your progress meeting 20 unique objectives across all mini-
 
 ## Tidyverse
 
-9.  [ ] Use `readr` functions to read in and write out data
-10. [ ] Use `dplyr` and `tidyr` functions to transform data
-11. [ ] Use `stringr` functions to work with string variables
+9.  [x] Use `readr` functions to read in and write out data
+10. [x] Use `dplyr` and `tidyr` functions to transform data
+11. [x] Use `stringr` functions to work with string variables
 12. [ ] Use `forcats` functions to work with factor variables
 
 ## Data visualization with ggplot2
@@ -47,8 +47,8 @@ This document tracks your progress meeting 20 unique objectives across all mini-
 
 ## Notebooks and code chunks
 
-22. [ ] Create and effectively use code chunks following best practices
-23. [ ] Use code chunks to set up a quarto document
+22. [x] Create and effectively use code chunks following best practices
+23. [x] Use code chunks to set up a quarto document
 24. [ ] Render publication-quality tables, figures, and images from code chunks
 25. [ ] Execute descriptive analyses and/or hypothesis testing in code chunks
 
