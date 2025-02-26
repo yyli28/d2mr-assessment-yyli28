@@ -1,0 +1,82 @@
+first_name,last_name,initials,height_in,height_cm,mass,hair,gender,species,homeworld,brown_hair,height_m,bmi,height_category,full_name,name_length,species_clean,species_group
+Mas,Amedda,MA,77.1652,196,NA,none,m,CHAGRIAN,Champala,FALSE,1.96,NA,Tall,Mas Amedda,9,Chagrian,Other Species
+Padmé,Amidala,PA,72.8345,185,45,brown,f,HUMAN,Naboo,TRUE,1.85,13.148283418553687,Tall,Padmé Amidala,12,Human,Human
+Raymus,Antilles,RA,74.0156,188,79,brown,m,HUMAN,Alderaan,TRUE,1.88,22.351742870076958,Tall,Raymus Antilles,14,Human,Human
+Wedge,Antilles,WA,66.929,170,77,brown,m,HUMAN,Corellia,TRUE,1.7,26.643598615916957,Medium,Wedge Antilles,13,Human,Human
+Dud,Bolt,DB,37.0078,94,45,none,m,VULPTEREEN,Vulpter,FALSE,0.94,50.92802172928928,Very Short,Dud Bolt,7,Vulptereen,Other Species
+Lando,Calrissian,LC,69.6849,177,79,black,m,HUMAN,Socorro,FALSE,1.77,25.2162533116282,Medium,Lando Calrissian,15,Human,Human
+Biggs,Darklighter,BD,72.0471,183,84,black,m,HUMAN,Tatooine,FALSE,1.83,25.082863029651524,Tall,Biggs Darklighter,16,Human,Human
+Jabba,Desilijic Tiure,JD,68.8975,175,1358,bald,m,HUTT,Nal Hutta,FALSE,1.75,443.42857142857144,Medium,Jabba Desilijic Tiure,20,Hutt,Other Species
+Boba,Fett,BF,72.0471,183,78.2,black,m,HUMAN,Kamino,FALSE,1.83,23.35095105855654,Tall,Boba Fett,8,Human,Human
+Jango,Fett,JF,72.0471,183,79,black,m,HUMAN,Concord Dawn,FALSE,1.83,23.589835468362743,Tall,Jango Fett,9,Human,Human
+Kit,Fisto,KF,77.1652,196,87,none,m,NAUTOLAN,Glee Anselm,FALSE,1.96,22.646813827571847,Tall,Kit Fisto,8,Nautolan,Other Species
+Bib,Fortuna,BF,70.866,180,NA,none,m,TWI'LEK,Ryloth,FALSE,1.8,NA,Tall,Bib Fortuna,10,Twi'lek,Other Species
+Adi,Gallia,AG,72.4408,184,50,none,f,THOLOTHIAN,Coruscant,FALSE,1.84,14.768431001890358,Tall,Adi Gallia,9,Tholothian,Other Species
+Nute,Gunray,NG,75.1967,191,90,none,m,NEIMODIAN,Cato Neimoidia,FALSE,1.91,24.67037636029714,Tall,Nute Gunray,10,Neimodian,Other Species
+San,Hill,SH,75.1967,191,NA,none,m,MUUN,Muunilinst,FALSE,1.91,NA,Tall,San Hill,7,Muun,Other Species
+Jar,Jar Binks,JJ,77.1652,196,66,none,m,GUNGAN,Naboo,FALSE,1.96,17.18034152436485,Tall,Jar Jar Binks,12,Gungan,Other Species
+Dexter,Jettster,DJ,77.9526,198,102,none,m,BESALISK,Ojom,FALSE,1.98,26.017753290480563,Tall,Dexter Jettster,14,Besalisk,Other Species
+Qui-Gon,Jinn,QJ,75.9841,193,89,brown,m,HUMAN,NA,TRUE,1.93,23.893258879433006,Tall,Qui-Gon Jinn,11,Human,Human
+Obi-Wan,Kenobi,OK,71.6534,182,77,"auburn, white",m,HUMAN,Stewjon,FALSE,1.82,23.24598478444632,Tall,Obi-Wan Kenobi,13,Human,Human
+Plo,Koon,PK,74.0156,188,80,none,m,KEL DOR,Dorin,FALSE,1.88,22.634676324128566,Tall,Plo Koon,7,Kel Dor,Other Species
+Eeth,Koth,EK,67.3227,171,NA,black,m,ZABRAK,Iridonia,FALSE,1.71,NA,Medium,Eeth Koth,8,Zabrak,Other Species
+Cliegg,Lars,CL,72.0471,183,NA,brown,m,HUMAN,Tatooine,TRUE,1.83,NA,Tall,Cliegg Lars,10,Human,Human
+Owen,Lars,OL,70.0786,178,120,"brown, grey",m,HUMAN,Tatooine,TRUE,1.78,37.87400580734756,Medium,Owen Lars,8,Human,Human
+Darth,Maul,DM,68.8975,175,80,none,m,ZABRAK,Dathomir,FALSE,1.75,26.122448979591837,Medium,Darth Maul,9,Zabrak,Other Species
+Tion,Medon,TM,81.1022,206,80,none,m,PAU'AN,Utapau,FALSE,2.06,18.85191818267509,Tall,Tion Medon,9,Pau'an,Other Species
+Sly,Moore,SM,70.0786,178,48,none,NA,NA,Umbara,FALSE,1.78,15.149602322939023,Medium,Sly Moore,8,NA,Other Species
+Mon,Mothma,MM,59.055,150,NA,auburn,f,HUMAN,Chandrila,FALSE,1.5,NA,Medium,Mon Mothma,9,Human,Human
+Rugor,Nass,RN,81.1022,206,NA,none,m,GUNGAN,Naboo,FALSE,2.06,NA,Tall,Rugor Nass,9,Gungan,Other Species
+Jocasta,Nu,JN,65.7479,167,NA,white,f,HUMAN,Coruscant,FALSE,1.67,NA,Medium,Jocasta Nu,9,Human,Human
+Nien,Nunb,NN,62.992,160,68,none,m,SULLUSTAN,Sullust,FALSE,1.6,26.562499999999996,Medium,Nien Nunb,8,Sullustan,Other Species
+Barriss,Offee,BO,65.3542,166,50,black,f,MIRIALAN,Mirial,FALSE,1.66,18.144868631151112,Medium,Barriss Offee,12,Mirialan,Other Species
+Ric,Olié,RO,72.0471,183,NA,brown,m,HUMAN,Naboo,TRUE,1.83,NA,Tall,Ric Olié,7,Human,Human
+Leia,Organa,LO,59.055,150,49,brown,f,HUMAN,Alderaan,TRUE,1.5,21.77777777777778,Medium,Leia Organa,10,Human,Human
+Quarsh,Panaka,QP,72.0471,183,NA,black,m,HUMAN,Naboo,FALSE,1.83,NA,Tall,Quarsh Panaka,12,Human,Human
+Yarael,Poof,YP,103.9368,264,NA,none,m,QUERMIAN,Quermia,FALSE,2.64,NA,Very Tall,Yarael Poof,10,Quermian,Other Species
+Bail,Prestor Organa,BP,75.1967,191,NA,black,m,HUMAN,Alderaan,FALSE,1.91,NA,Tall,Bail Prestor Organa,18,Human,Human
+Ben,Quadinaros,BQ,64.1731,163,65,none,m,TOONG,Tund,FALSE,1.63,24.46460160337235,Medium,Ben Quadinaros,13,Toong,Other Species
+Ayla,Secura,AS,70.0786,178,55,none,f,TWI'LEK,Ryloth,FALSE,1.78,17.35891932836763,Medium,Ayla Secura,10,Twi'lek,Other Species
+Anakin,Skywalker,AS,74.0156,188,84,blond,m,HUMAN,Tatooine,FALSE,1.88,23.766410140334994,Tall,Anakin Skywalker,15,Human,Human
+Luke,Skywalker,LS,67.7164,172,77,blond,m,HUMAN,Tatooine,FALSE,1.72,26.027582477014604,Medium,Luke Skywalker,13,Human,Human
+Shmi,Skywalker,SS,64.1731,163,NA,black,f,HUMAN,Tatooine,FALSE,1.63,NA,Medium,Shmi Skywalker,13,Human,Human
+Han,Solo,HS,70.866,180,80,brown,m,HUMAN,Corellia,TRUE,1.8,24.691358024691358,Tall,Han Solo,7,Human,Human
+Lama,Su,LS,90.1573,229,88,none,m,KAMINOAN,Kamino,FALSE,2.29,16.78076314334204,Very Tall,Lama Su,6,Kaminoan,Other Species
+Wicket,Systri Warrick,WS,34.6456,88,20,brown,m,EWOK,Endor,TRUE,0.88,25.826446280991735,Very Short,Wicket Systri Warrick,20,Ewok,Other Species
+Wat,Tambor,WT,75.9841,193,48,none,m,SKAKOAN,Skako,FALSE,1.93,12.886251979918924,Tall,Wat Tambor,9,Skakoan,Other Species
+Wilhuff,Tarkin,WT,70.866,180,NA,"auburn, grey",m,HUMAN,Eriadu,FALSE,1.8,NA,Tall,Wilhuff Tarkin,13,Human,Human
+Roos,Tarpals,RT,88.1888,224,82,none,m,GUNGAN,Naboo,FALSE,2.24,16.342474489795915,Very Tall,Roos Tarpals,11,Gungan,Other Species
+Shaak,Ti,ST,70.0786,178,57,none,f,TOGRUTA,Shili,FALSE,1.78,17.99015275849009,Medium,Shaak Ti,7,Togruta,Other Species
+Saesee,Tiin,ST,74.0156,188,NA,none,m,IKTOTCHI,Iktotch,FALSE,1.88,NA,Tall,Saesee Tiin,10,Iktotchi,Other Species
+Jek,Tono Porkins,JT,70.866,180,110,brown,NA,NA,Bestine IV,TRUE,1.8,33.95061728395061,Tall,Jek Tono Porkins,15,NA,Other Species
+Ratts,Tyerel,RT,31.1023,79,15,none,m,ALEENA,Aleen Minor,FALSE,0.79,24.034609838166958,Very Short,Ratts Tyerel,11,Aleena,Other Species
+Gregar,Typho,GT,72.8345,185,85,black,NA,NA,Naboo,FALSE,1.85,24.835646457268076,Tall,Gregar Typho,11,NA,Other Species
+Luminara,Unduli,LU,66.929,170,56.2,black,f,MIRIALAN,Mirial,FALSE,1.7,19.446366782006923,Medium,Luminara Unduli,14,Mirialan,Other Species
+Darth,Vader,DV,79.5274,202,136,none,m,HUMAN,Tatooine,FALSE,2.02,33.33006567983531,Tall,Darth Vader,10,Human,Human
+Finis,Valorum,FV,66.929,170,NA,blond,m,HUMAN,Coruscant,FALSE,1.7,NA,Medium,Finis Valorum,12,Human,Human
+Taun,We,TW,83.8581,213,NA,none,f,KAMINOAN,Kamino,FALSE,2.13,NA,Very Tall,Taun We,6,Kaminoan,Other Species
+Zam,Wesell,ZW,66.1416,168,55,blonde,f,CLAWDITE,Zolan,FALSE,1.68,19.48696145124717,Medium,Zam Wesell,9,Clawdite,Other Species
+Beru,Whitesun Lars,BW,64.9605,165,75,brown,f,HUMAN,Tatooine,TRUE,1.65,27.548209366391188,Medium,Beru Whitesun Lars,17,Human,Human
+Mace,Windu,MW,74.0156,188,84,none,m,HUMAN,Haruun Kal,FALSE,1.88,23.766410140334994,Tall,Mace Windu,9,Human,Human
+Poggle,the Lesser,Pt,72.0471,183,80,none,m,GEONOSIAN,Geonosis,FALSE,1.83,23.888440980620498,Tall,Poggle the Lesser,16,Geonosian,Other Species
+Ackbar,NA,ANA,70.866,180,83,none,m,MON CALAMARI,Mon Cala,FALSE,1.8,25.61728395061728,Tall,NA,NA,Mon Calamari,Other Species
+Bossk,NA,BNA,74.803,190,113,none,m,TRANDOSHAN,Trandosha,FALSE,1.9,31.301939058171747,Tall,NA,NA,Trandoshan,Other Species
+C-3PO,NA,CNA,65.7479,167,75,bald,m,DROID,Tatooine,FALSE,1.67,26.89232313815483,Medium,NA,NA,Droid,Droid
+Chewbacca,NA,CNA,89.7636,228,112,brown,m,WOOKIEE,Kashyyyk,TRUE,2.28,21.545090797168363,Very Tall,NA,NA,Wookiee,Wookiee
+Cordé,NA,CNA,61.8109,157,NA,brown,NA,NA,Naboo,TRUE,1.57,NA,Medium,NA,NA,NA,Other Species
+Dooku,NA,DNA,75.9841,193,80,white,m,HUMAN,Serenno,FALSE,1.93,21.47708663319821,Tall,NA,NA,Human,Human
+Dormé,NA,DNA,64.9605,165,NA,brown,f,HUMAN,Naboo,TRUE,1.65,NA,Medium,NA,NA,Human,Human
+Gasgano,NA,GNA,48.0314,122,NA,none,m,XEXTO,Troiken,FALSE,1.22,NA,Short,NA,NA,Xexto,Other Species
+Greedo,NA,GNA,68.1101,173,74,bald,m,RODIAN,Rodia,FALSE,1.73,24.725182932941294,Medium,NA,NA,Rodian,Other Species
+Grievous,NA,GNA,85.0392,216,159,none,m,KALEESH,Kalee,FALSE,2.16,34.07921810699588,Very Tall,NA,NA,Kaleesh,Other Species
+IG-88,NA,INA,78.74,200,140,none,m,DROID,NA,FALSE,2,35,Tall,NA,NA,Droid,Droid
+Ki-Adi-Mundi,NA,KNA,77.9526,198,82,white,m,CEREAN,Cerea,FALSE,1.98,20.91623303744516,Tall,NA,NA,Cerean,Other Species
+Lobot,NA,LNA,68.8975,175,79,none,m,HUMAN,Bespin,FALSE,1.75,25.79591836734694,Medium,NA,NA,Human,Human
+Palpatine,NA,PNA,66.929,170,75,grey,m,HUMAN,Naboo,FALSE,1.7,25.95155709342561,Medium,NA,NA,Human,Human
+R2-D2,NA,RNA,37.7952,96,32,bald,m,DROID,Naboo,FALSE,0.96,34.72222222222222,Very Short,NA,NA,Droid,Droid
+R4-P17,NA,RNA,37.7952,96,NA,none,f,DROID,NA,FALSE,0.96,NA,Very Short,NA,NA,Droid,Droid
+R5-D4,NA,RNA,38.1889,97,32,bald,m,DROID,Tatooine,FALSE,0.97,34.009990434690195,Very Short,NA,NA,Droid,Droid
+Sebulba,NA,SNA,44.0944,112,40,none,m,DUG,Malastare,FALSE,1.12,31.887755102040813,Short,NA,NA,Dug,Other Species
+Tarfful,NA,TNA,92.1258,234,136,brown,m,WOOKIEE,Kashyyyk,TRUE,2.34,24.837460734896638,Very Tall,NA,NA,Wookiee,Wookiee
+Watto,NA,WNA,53.9369,137,NA,black,m,TOYDARIAN,Toydaria,FALSE,1.37,NA,Short,NA,NA,Toydarian,Other Species
+Yoda,NA,YNA,25.9842,66,17,white,m,YODA'S SPECIES,NA,FALSE,0.66,39.02662993572084,Very Short,NA,NA,Yoda's Species,Other Species

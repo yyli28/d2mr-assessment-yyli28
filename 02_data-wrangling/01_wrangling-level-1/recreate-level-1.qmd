@@ -377,19 +377,61 @@ hair_summary <- sw.optional %>%
   arrange(desc(count))
 view(hair_summary)
 
-# Display summaries as  tables
-knitr::kable(height_summary, 
-             caption = "Table 1: Height Statistics by Species Group",
-             digits = 1)
+```
 
-knitr::kable(hair_summary %>% head(6), 
-             caption = "Table 2: Distribution of Hair Colors (Top 6)",
-             digits = 3)
+The analysis of Star Wars character data showed interesting patterns. @tbl-height-statistics shows the height statistics across different species groups, with Wookiees being notably taller than other species. The distribution of hair colors in @tbl-hair-distribution indicates that certain hair colors are much more common in the Star Wars universe.
 
+```{r}
+#| label: tbl-height-statistics
+#| tbl-cap: "Table 1: Height Statistics by Species Group"
+
+library(kableExtra)
+
+height_summary_table <- height_summary %>%
+  knitr::kable(
+    digits = c(0, 0, 1, 1, 1, 1, 1), 
+    col.names = c("Species Group", "Count", "Mean Height (cm)", 
+                 "Median Height (cm)", "Min Height (cm)", 
+                 "Max Height (cm)", "SD (cm)"),
+    align = c("l", "c", "r", "r", "r", "r", "r"),
+    format.args = list(big.mark = ",")
+  ) %>%
+  kable_styling(latex_options = c("striped", "hold_position")) %>%
+  row_spec(0, bold = TRUE, background = "#e6f3ff") %>%
+  column_spec(1, bold = TRUE) %>%
+  add_header_above(
+    c(" " = 2, "Height Measurements" = 5))
+
+height_summary_table
 ```
 
 ```{r}
-#| label: create-beautiful-visuals
+#| label: tbl-hair-distribution
+#| tbl-cap: "Table 2: Distribution of Hair Colors (Top 6)"
+
+hair_summary_table <- hair_summary %>% 
+  head(6) %>%
+  knitr::kable(
+    digits = c(0, 0, 3, 1),
+    col.names = c("Hair Color", "Number of Characters", "Proportion", "Avg. Height (cm)"),
+    align = c("l", "c", "c", "r"),
+    format.args = list(decimal.mark = ".")
+  ) %>%
+  kable_styling(latex_options = c("striped", "hold_position")) %>%
+  row_spec(0, bold = TRUE, background = "#fff0e6") %>%
+  column_spec(3, background = scales::alpha(
+    colorRampPalette(c("white", "lightblue"))(6), 
+    hair_summary$proportion[1:6]
+  ))
+
+hair_summary_table
+```
+
+When examining the relationship between height and mass as shown in @fig-height-mass, we can observe a positive correlation, with some variation by species group. 
+
+```{r}
+#| label: fig-height-mass
+#| fig-cap: "Figure 1: Height-Mass Relationship by Species Group"
 
 # A scatter plot showing relationship between height and weight for different Species Group
 sw.hm <- sw.optional %>% 
@@ -420,31 +462,64 @@ ggplot(sw.hm, aes(x = height_cm, y = mass)) +
     y = "Mass (kg)",
     color = "Gender"
   )
+```
 
+The mass distribution of Star Wars characters varies significantly by species group, gender, and hair color as shown in @fig-mass-distribution. From this visualization, we can observe that humans tend to have a more concentrated mass distribution compared to other species.
 
-# A visual showing height distribution for different species groups
-sw.height <- sw.optional
-  ggplot(sw.optional, aes(x = species_group, y = height_cm, fill = species_group)) +
-  geom_boxplot() +
+```{r}
+#| label: fig-mass-distribution
+#| fig-cap: "Figure 1: Mass Distribution of Star Wars Characters by Gender and Hair Color"
+
+mass_distribution <- sw.optional %>% 
+  filter(!is.na(mass) & mass < 500)
+
+ggplot(sw.hm, aes(x = mass)) +
+  geom_histogram(aes(fill = species_group), binwidth = 20, 
+                alpha = 0.7, position = "identity") +
+  geom_density(aes(color = species_group, y = after_stat(count) * 20), 
+              linewidth = 1, alpha = 0.7) +
+  geom_vline(aes(xintercept = mean(mass, na.rm = TRUE)), 
+            linetype = "dashed", color = "black", linewidth = 1) +
+  facet_grid(gender ~ brown_hair, 
+            labeller = labeller(
+              gender = c("f" = "Female", "m" = "Male", "NA" = "Unknown"),
+              brown_hair = c("TRUE" = "Brown Hair", "FALSE" = "Other Hair")
+            )) +
+
   scale_fill_manual(values = c(
     "Human" = "lightblue",
     "Droid" = "pink", 
-    "Wookiee" = "darkgreen",
+    "Wookiee" = "green",
     "Other Species" = "yellow"
   )) +
+  scale_color_manual(values = c(
+    "Human" = "darkblue",
+    "Droid" = "darkred", 
+    "Wookiee" = "darkgreen",
+    "Other Species" = "orange"
+  )) +
+
   theme_minimal() +
   theme(
     plot.title = element_text(face = "bold", size = 14),
-    axis.text.x = element_text(angle = 45, hjust = 1, face = "bold", size = 12),
-    legend.position = "none"
-  )+
+    plot.subtitle = element_text(size = 12, color = "black"),
+    strip.background = element_rect(fill = "lightgray"),
+    strip.text = element_text(face = "bold", color = "black", size = 11),
+    axis.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold")
+  ) +
   labs(
-    title = "Height Distribution Across Species Groups",
-    x = "Species Group",
-    y = "Height (cm)",
-    fill = "Species Group"
-  ) 
+    title = "Mass Distribution of Star Wars Characters",
+    subtitle = "Comparing species groups across gender and hair color",
+    x = "Mass (kg)",
+    y = "Count",
+    fill = "Species Group",
+    color = "Species Group"
+  )
 ```
+
 
 # OPTIONAL: Export/write your data to .csv
 
