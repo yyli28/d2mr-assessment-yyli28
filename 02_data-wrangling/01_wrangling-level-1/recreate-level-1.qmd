@@ -32,7 +32,7 @@ sw.wrangled.goal <- read_csv("sw-wrangled.csv") %>%
    mutate(across(c(hair, gender, species, homeworld), factor)) # this is a quick-and-dirty fix to account for odd importing behavior
 
 # View in console
-sw.wrangled.goal 
+view(sw.wrangled.goal) 
 
 view(starwars)
 str(starwars)
@@ -95,6 +95,8 @@ Start by saving the `starwars` dataset to a new tbl called `sw.wrangled`. You wi
 
 # Assign the starwars dataset to a new tbl called sw.wrangled
 
+sw.wrangled <- starwars
+
 ```
 
 QUESTION:
@@ -121,7 +123,7 @@ Before you start making changes to the `sw.wrangled` dataset, identify the diffe
 
 # Use the all.equal() function to compare the two datasets
 
-all.equal(sw.wrangled, sw-wrangled)
+all.equal(sw.wrangled, sw.wrangled.goal)
 
 # If the all.equal() function returns a message, read it carefully to understand the differences between the two datasets.
 
@@ -137,7 +139,7 @@ In this assignment, you'll make the necessary changes in individual steps in the
 
 ```{r}
 
-#| label: your-unique-informative-label-goes-here
+#| label: select-rename-columns
 
 # Select only needed columns & rename height (to height_cm) and hair_color (to hair)
 
@@ -148,6 +150,7 @@ sw.wrangled <- starwars %>%
 ```
 
 ```{r}
+#| label: filter-missing-height
 
 # Filter out any rows where height data is missing
 
@@ -156,6 +159,7 @@ filter(!is.na(height_cm))
 ```
 
 ```{r}
+#| label: separate-names
 
 # Break names into two columns (first_name, last_name); use first space " " as delimiter
 
@@ -165,6 +169,8 @@ separate(name, into = c("first_name", "last_name"), sep = " ", extra = "merge")
 ```
 
 ```{r}
+#| label: convert-to-factors
+
 # Change categorical variables (but currently character) to factors
 
 sw.wrangled <- sw.wrangled %>%
@@ -177,6 +183,7 @@ sw.wrangled <- sw.wrangled %>%
 ```
 
 ```{r}
+#| label: add-height-inches
 
 # Create a second height column by converting cm to inches
 
@@ -185,6 +192,8 @@ sw.wrangled <- sw.wrangled %>%
 ```
 
 ```{r}
+#| label: replace-na-hair
+
 # where there is no value in hair, use value "bald"
 
 sw.wrangled <- sw.wrangled %>%
@@ -194,6 +203,7 @@ sw.wrangled <- sw.wrangled %>%
 ```
 
 ```{r}
+#| label: create-brown-hair
 
 # create a logical variable that returns true if "brown" is anywhere in the string value for hair 
 
@@ -203,10 +213,11 @@ sw.wrangled <- sw.wrangled %>%
 ```
 
 ```{r}
+#| label: create-initials
 
 # create an initials column by concatenating the first characters of the first and last name
 
-w.wrangled <- sw.wrangled %>%
+sw.wrangled <- sw.wrangled %>%
   mutate(initials = paste0(
     substr(first_name, 1, 1),
     substr(last_name, 1, 1)
@@ -215,6 +226,7 @@ w.wrangled <- sw.wrangled %>%
 ```
 
 ```{r}
+#| label: rearrange-column
 
 # Rearrange height_in and initials columns
 
@@ -225,10 +237,11 @@ sw.wrangled <- sw.wrangled %>%
 ```
 
 ```{r}
+#| label: sort-rows
 
 # Sort by last_name and then (when last_name matches) by first_name 
 
-w.wrangled <- sw.wrangled %>%
+sw.wrangled <- sw.wrangled %>%
   arrange(last_name, first_name)
 
 ```
@@ -269,7 +282,7 @@ sw.wrangled <- starwars %>%
          hair, gender, species, homeworld, brown_hair) %>%
   arrange(last_name, first_name)
 
-all.equal(sw.wrangled, sw-wrangled)
+all.equal(sw.wrangled, sw.wrangled.goal)
 view(sw.wrangled)
 
 ```
@@ -283,7 +296,7 @@ Check that your `sw.wrangled` dataframe is identical to the goal dataframe using
 
 # Use all.equal()
 
-all.equal(sw.wrangled, sw-wrangled)
+all.equal(sw.wrangled, sw.wrangled.goal)
 ```
 
 Use any returned information about mismatches to adjust your code as needed.
@@ -300,25 +313,137 @@ You can do these transformations one pipe/chunk or several. Either way, include 
 
 ```{r}
 
-#| label: rename-me-to-something-sensible
+#| label: create-enhanced-dataset-tables
 
 sw.optional <- sw.wrangled %>%
-  # Add a BMI calculation 
+  # Add a column of BMI 
   mutate(
     height_m = height_cm / 100,
     bmi = ifelse(!is.na(mass) & height_m > 0, mass / (height_m^2), NA),
     
-    # Create height category using comparison operators
+    # Create height category 
     height_category = case_when(
       height_cm < 100 ~ "Very Short",
       height_cm < 150 ~ "Short", 
       height_cm < 180 ~ "Medium",
       height_cm < 210 ~ "Tall",
       TRUE ~ "Very Tall"
-    )),
-
+    ),
+    # Make height category an ordered factor 
+    height_category = fct_relevel(height_category, 
+                                 "Very Short", "Short", "Medium", "Tall", "Very Tall"),
     
+    # Create a new column called full_name that combines the first_name and last_name columns with a space between them.
+    full_name = str_c(first_name, " ", last_name),
+    # Creates a new column called name_length that calculates the total number of characters in a character's name 
+    name_length = str_length(first_name) + str_length(last_name),
+    
+    # creating a new column called species_clean
+    species_clean = str_to_title(as.character(species)),
 
+    species_group = case_when(
+      str_detect(species, "HUMAN") ~ "Human",
+      str_detect(species, "DROID") ~ "Droid",
+      str_detect(species, "WOOKIEE") ~ "Wookiee",
+      TRUE ~ "Other Species"
+    )
+  ) %>%
+  # Convert species_group to factor 
+  mutate(species_group = fct_infreq(species_group))
+view (sw.optional)
+
+# Create a new dataset to summarize variables 
+height_summary <- sw.optional %>%
+  group_by(species_group) %>%
+  summarize(
+    count = n(),                                       # Counts the number of observations in each species group
+    avg_height = mean(height_cm, na.rm = TRUE),        # Calculates the average height for each species group
+    median_height = median(height_cm, na.rm = TRUE),   # Calculates the median height
+    min_height = min(height_cm, na.rm = TRUE),
+    max_height = max(height_cm, na.rm = TRUE),
+    sd_height = sd(height_cm, na.rm = TRUE)
+  ) %>%
+  arrange(desc(count)) # Sort the species groups in descending order
+view(height_summary)
+
+# Summarize categorical variables
+hair_summary <- sw.optional %>%
+  group_by(hair) %>%
+  summarize(
+    count = n(),    
+    proportion = n() / nrow(sw.optional),              # Calculates what proportion of all variables have this hair color
+    avg_height = mean(height_cm, na.rm = TRUE)
+  ) %>%
+  arrange(desc(count))
+view(hair_summary)
+
+# Display summaries as  tables
+knitr::kable(height_summary, 
+             caption = "Table 1: Height Statistics by Species Group",
+             digits = 1)
+
+knitr::kable(hair_summary %>% head(6), 
+             caption = "Table 2: Distribution of Hair Colors (Top 6)",
+             digits = 3)
+
+```
+
+```{r}
+#| label: create-beautiful-visuals
+
+# A scatter plot showing relationship between height and weight for different Species Group
+sw.hm <- sw.optional %>% 
+  filter(!is.na(mass) & mass < 500)                            # Remove outliers
+  
+ggplot(sw.hm, aes(x = height_cm, y = mass)) +
+  geom_point(aes(color = gender), size = 1.5, alpha = 0.5) +
+  geom_smooth(
+    aes(color = gender),
+    method = "lm", alpha = 0.2, fill = "blue") +
+  facet_wrap(~ species_group, scales = "free_y") +
+  scale_color_manual(
+    values = c(
+      "f" = "maroon",
+      "m" = "grey50",
+      "NA" = "orange"
+    ))+
+  theme_light() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    strip.background = element_rect(fill = "pink"),
+    strip.text = element_text(face = "bold", color = "black"),
+    legend.position = "bottom"
+  ) +
+  labs(
+    title = "Height-Mass Relationship by Species Group",
+    x = "Height (cm)",
+    y = "Mass (kg)",
+    color = "Gender"
+  )
+
+
+# A visual showing height distribution for different species groups
+sw.height <- sw.optional
+  ggplot(sw.optional, aes(x = species_group, y = height_cm, fill = species_group)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c(
+    "Human" = "lightblue",
+    "Droid" = "pink", 
+    "Wookiee" = "darkgreen",
+    "Other Species" = "yellow"
+  )) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    axis.text.x = element_text(angle = 45, hjust = 1, face = "bold", size = 12),
+    legend.position = "none"
+  )+
+  labs(
+    title = "Height Distribution Across Species Groups",
+    x = "Species Group",
+    y = "Height (cm)",
+    fill = "Species Group"
+  ) 
 ```
 
 # OPTIONAL: Export/write your data to .csv
@@ -330,9 +455,12 @@ If you would like to export your dataframe(s) to a .csv file, you can use the `w
 
 # Write sw.wrangled to a .csv file
 
-write_csv(sw.wrangled, "sw-wrangled-output.csv")
+write_csv(sw.optional, "sw-enhanced.csv")
 
 # Write sw.optional to a .csv file
+
+write_csv(height_summary, "height-summary.csv")
+write_csv(hair_summary, "hair-summary.csv")
 
 
 ```
