@@ -19,7 +19,7 @@ Section: 1
 
 Mini-project title: Data-wrangling-level-1
 
-Submission date: 2/25
+Submission date: 2/26
 
 Project GitHub subdirectory URL:
 
@@ -499,6 +499,8 @@ Optionally, you may provide a brief reflection on your experience with this proj
 Thoughtful reflections may earn engagement points.
 
 <!-- Reflection below this line -->
+
+Working with the Star Wars data in R was both fun and challenging. The visualization part was tricky at times. Getting the facets right took some trial and error. sometimes my plots ended up too cluttered or hard to read and looked like some terrible visuals. But when everything worked out and I got a better visualization showing patterns of the dataset, it felt really rewarding. If I would do it again, I'd probably run my codes more frequently before continuing to write down all lines so that I could realize how bad the visual is. This would have saved me a lot of time tweaking and adjusting plots that weren't working well. And I would definitely give up what I have and start a new one.
 
 <!-- Do not edit below this line. -->
 
