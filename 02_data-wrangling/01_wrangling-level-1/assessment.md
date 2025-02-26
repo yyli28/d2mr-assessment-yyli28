@@ -21,7 +21,7 @@ Mini-project title: Data-wrangling-level-1
 
 Submission date: 2/26
 
-Project GitHub subdirectory URL:
+Project GitHub subdirectory URL: <https://github.com/yyli28/d2mr-assessment-yyli28/tree/9b9f3d71e39e13377732b9032df5d767d745952b/02_data-wrangling/01_wrangling-level-1>
 
 URL or instructions to access additional materials, if needed:
 
