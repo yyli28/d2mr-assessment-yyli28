@@ -55,7 +55,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [ ] Objective attempt
         -   [x] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 2.  Maintain an informative and up-to-date README.md
@@ -66,7 +66,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [ ] Objective attempt
         -   [x] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 3.  Integrate a GitHub repo with an R studio project, including .gitignore file
@@ -77,7 +77,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [ ] Objective attempt
         -   [x] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 4.  Effectively use version control
@@ -88,8 +88,8 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [ ] Objective attempt
         -   [x] Unique objective attempt
-        -   [ ] Objective met
-        -   Grader comments:
+        -   [x] Objective met
+        -   Grader comments: Avoid using not infomrative commit messages like "x".
 
 ### R programming
 
@@ -101,7 +101,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [x] Objective attempt
         -   [ ] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 6.  Use arithmetic, comparison, and logical operators
@@ -149,7 +149,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [ ] Objective attempt
         -   [x] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 10. Use `dplyr` and `tidyr` functions to transform data
@@ -162,7 +162,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [ ] Objective attempt
         -   [x] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 11. Use `stringr` functions to work with string variables
@@ -173,7 +173,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [ ] Objective attempt
         -   [x] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 12. Use `forcats` functions to work with factor variables
@@ -324,8 +324,8 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [ ] Objective attempt
         -   [x] Unique objective attempt
-        -   [ ] Objective met
-        -   Grader comments:
+        -   [x] Objective met
+        -   Grader comments: Improvments could be made here as some chunks are not named.
 
 23. Use code chunks to set up a quarto document
 
@@ -339,7 +339,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [ ] Objective attempt
         -   [x] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 24. Render publication-quality tables, figures, and images from code chunks
@@ -506,11 +506,11 @@ This project provided a valuable hands-on experience in data cleaning. One of th
 
 ## Grader feedback
 
--   Grader:
--   Date:
--   Points toward unique objectives (up to 20):
--   Additional points (up to 20):
--   TA provisional engagement points (up to 10):
+-   Grader: Mian
+-   Date: Feb 26, 2025
+-   Points toward unique objectives (up to 20): 9
+-   Additional points (up to 20): 5 = 1 objective met + 4 unassessed
+-   TA provisional engagement points (up to 10): 7
 -   Final approved engagement points (up to 10):
 -   Total points (up to 50):
 
