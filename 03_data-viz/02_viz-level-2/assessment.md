@@ -17,11 +17,11 @@ CNetID: yangyueli28
 
 Section: 1
 
-Mini-project title:
+Mini-project title: Data-viz-level-2
 
-Submission date:
-
-Project GitHub subdirectory URL:
+Submission date: 2/26
+ 
+Project GitHub subdirectory URL: https://github.com/yyli28/d2mr-data-viz-level2.git (a separate repo)
 
 URL or instructions to access additional materials, if needed:
 
