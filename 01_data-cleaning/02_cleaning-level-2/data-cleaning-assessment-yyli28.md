@@ -511,8 +511,8 @@ This project provided a valuable hands-on experience in data cleaning. One of th
 -   Points toward unique objectives (up to 20): 9
 -   Additional points (up to 20): 5 = 1 objective met + 4 unassessed
 -   TA provisional engagement points (up to 10): 7
--   Final approved engagement points (up to 10):
--   Total points (up to 50):
+-   Final approved engagement points (up to 10): 7
+-   Total points (up to 50): 20 - great work!
 
 Engagement points are awarded for going above and beyond the expectations of the project and are not guaranteed on any given submission. Demonstrating the assessed learning objectives earns you points in those categories, but engagement points are awarded for exceptional effort, creativity, or skill.
 
