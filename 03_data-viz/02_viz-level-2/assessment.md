@@ -19,9 +19,9 @@ Section: 1
 
 Mini-project title: Data-viz-level-2
 
-Submission date: 2/26
- 
-Project GitHub subdirectory URL: https://github.com/yyli28/d2mr-data-viz-level2.git (a separate repo)
+Submission date: 3/1
+
+Project GitHub subdirectory URL: <https://github.com/yyli28/d2mr-data-viz-level2.git> (a separate repo)
 
 URL or instructions to access additional materials, if needed:
 
@@ -53,7 +53,7 @@ Below each learning objective is a list of general expectations for meeting that
 
     3.  Does not have duplicate/redundant elements
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
@@ -64,7 +64,7 @@ Below each learning objective is a list of general expectations for meeting that
 
     2.  Outlines the repo structure with file tree or similar
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
@@ -75,7 +75,7 @@ Below each learning objective is a list of general expectations for meeting that
 
     2.  .gitignore comprehensively excludes unnecessary, private, and very large files and is be commeted appropriately
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
@@ -86,7 +86,7 @@ Below each learning objective is a list of general expectations for meeting that
 
     2.  Relies on document revisions rather than manually created new versions
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
@@ -182,7 +182,7 @@ Below each learning objective is a list of general expectations for meeting that
 
     2.  Uses `forcats` functions in a data transformation pipeline
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
@@ -195,7 +195,7 @@ Below each learning objective is a list of general expectations for meeting that
 
     2.  At least one plot is multi-variable
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
@@ -204,7 +204,7 @@ Below each learning objective is a list of general expectations for meeting that
 
     1.  Uses at least 2 unique data-mapped `aes()` arguments (e.g., color, shape, size) to group data in a plot in one or multiple plots
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
@@ -215,7 +215,7 @@ Below each learning objective is a list of general expectations for meeting that
 
     2.  Combines facets with other dynamic grouping aesthetics
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
@@ -230,7 +230,7 @@ Below each learning objective is a list of general expectations for meeting that
 
     4.  Uses at least 1 static aesthetic (e.g., color, shape, size) that improves visual clarity without mapping to data
 
-        -   [ ] Objective attempt
+        -   [x] Objective attempt
         -   [ ] Unique objective attempt
         -   [ ] Objective met
         -   Grader comments:
@@ -479,6 +479,8 @@ You are not required to demonstrate these objectives in your independent project
 If you believe you have demonstrated any of the above skills sufficiently to count toward the 20 additional objectives-based points, please indicate which objective(s) you believe you have met and provide a brief explanation of how you have met each objective.
 
 <!-- Explanation of demonstrated unassessed objectives below this line -->
+
+I followed a coding style guide. I used frequent, informative comments in code and markdown. My visuals explained and applied the "grammar of graphics". I recognized and interpreted common data visualizations. I determined most appropriate visualizations by improving the terrible visualization.
 
 <!-- Explanation of demonstrated unassessed objectives above this line -->
 
