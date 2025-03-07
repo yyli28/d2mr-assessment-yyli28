@@ -55,7 +55,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [x] Objective attempt
         -   [ ] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 2.  Maintain an informative and up-to-date README.md
@@ -66,7 +66,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [x] Objective attempt
         -   [ ] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 3.  Integrate a GitHub repo with an R studio project, including .gitignore file
@@ -77,7 +77,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [x] Objective attempt
         -   [ ] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 4.  Effectively use version control
@@ -88,7 +88,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [x] Objective attempt
         -   [ ] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 ### R programming
@@ -185,7 +185,7 @@ Below each learning objective is a list of general expectations for meeting that
         -   [x] Objective attempt
         -   [ ] Unique objective attempt
         -   [ ] Objective met
-        -   Grader comments:
+        -   Grader comments: I did not find any use of `forcats`. Feel free to reach out if the script does include some.
 
 ### Data visualization with ggplot2
 
@@ -197,7 +197,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [x] Objective attempt
         -   [ ] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 14. Use dynamic aesthetics to group data
@@ -206,7 +206,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [x] Objective attempt
         -   [ ] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 15. Use facets to create parallel plots
@@ -217,7 +217,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [x] Objective attempt
         -   [ ] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 16. Create publication-quality plots using `theme` and `labs` layers
@@ -232,7 +232,7 @@ Below each learning objective is a list of general expectations for meeting that
 
         -   [x] Objective attempt
         -   [ ] Unique objective attempt
-        -   [ ] Objective met
+        -   [x] Objective met
         -   Grader comments:
 
 ### Data analysis
@@ -504,11 +504,11 @@ Thoughtful reflections may earn engagement points.
 
 ## Grader feedback
 
--   Grader:
--   Date:
+-   Grader: Mian
+-   Date: March 5, 2024
 -   Points toward unique objectives (up to 20):
--   Additional points (up to 20):
--   TA provisional engagement points (up to 10):
+-   Additional points (up to 20): 13 = 8 objectives + 5 unassessed
+-   TA provisional engagement points (up to 10): 4
 -   Final approved engagement points (up to 10):
 -   Total points (up to 50):
 
