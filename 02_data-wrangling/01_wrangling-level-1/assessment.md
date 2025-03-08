@@ -508,11 +508,11 @@ Working with the Star Wars data in R was both fun and challenging. The visualiza
 
 -   Grader:
 -   Date:
--   Points toward unique objectives (up to 20): 7
--   Additional points (up to 20): 13 = 6 objectives met + 7 unassessed
+-   Points toward unique objectives (up to 20): 7 (max)
+-   Additional points (up to 20): ~~13~~ = 6 objectives met + 7 unassessed = 12 (max)
 -   TA provisional engagement points (up to 10): 6
--   Final approved engagement points (up to 10):
--   Total points (up to 50):
+-   Final approved engagement points (up to 10): 0 (max)
+-   Total points (up to 50): 19 (max 50/50)
 
 Engagement points are awarded for going above and beyond the expectations of the project and are not guaranteed on any given submission. Demonstrating the assessed learning objectives earns you points in those categories, but engagement points are awarded for exceptional effort, creativity, or skill.
 
